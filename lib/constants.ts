@@ -1,4 +1,6 @@
-const API = {};
+const API = {
+  createStore: '/api/stores'
+};
 
 const ICONS = {
   favicon: '/icons/favicon.ico'

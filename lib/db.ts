@@ -11,4 +11,4 @@ if (process.env.NODE_ENV !== 'production') {
   globalThis.prisma = prismaClient;
 }
 
-export { prismaClient as db };
+export { prismaClient as prismadb };

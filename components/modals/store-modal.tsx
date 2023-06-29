@@ -3,8 +3,12 @@
 import type { FC } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import type { Store } from '@prisma/client';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 
+import { API } from '@/lib/constants';
 import type { FormSchema } from '@/lib/validators';
 import { formSchema } from '@/lib/validators';
 
@@ -24,7 +28,7 @@ import { Input } from '@/common/ui/input';
 import { Modal } from '../ui';
 
 const StoreModal: FC = () => {
-  const { isOpen, onClose } = useStoreModal();
+  const { isOpen, onClose, isLoading, setIsLoading } = useStoreModal();
   const form = useForm<FormSchema>({
     defaultValues: {
       name: ''
@@ -33,8 +37,17 @@ const StoreModal: FC = () => {
   });
 
   const handleSubmit = async (formData: FormSchema) => {
-    console.log(formData);
-    // TODO: Create store
+    try {
+      setIsLoading(true);
+
+      const { data } = await axios.post<Store>(API.createStore, formData);
+
+      toast.success(`Store ${data.name} created.`);
+    } catch (err: unknown) {
+      toast.error('Somrthing went wrong.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -55,7 +68,11 @@ const StoreModal: FC = () => {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder='E-Commerce' {...field} />
+                      <Input
+                        disabled={isLoading}
+                        placeholder='E-Commerce'
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -63,10 +80,16 @@ const StoreModal: FC = () => {
               />
 
               <div className='flex items-center justify-end space-x-2 pt-6'>
-                <Button variant='outline' onClick={onClose}>
+                <Button
+                  variant='outline'
+                  onClick={onClose}
+                  disabled={isLoading}
+                >
                   Cancel
                 </Button>
-                <Button type='submit'>Continue</Button>
+                <Button disabled={isLoading} type='submit'>
+                  Continue
+                </Button>
               </div>
             </form>
           </Form>

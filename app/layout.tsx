@@ -4,9 +4,11 @@ import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
 
 import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from 'react-hot-toast';
 
 import { ICONS } from '@/lib/constants';
 import ModalProvider from '@/lib/providers/_modal';
+import { toastOptions } from '@/lib/toast';
 
 import './globals.scss';
 
@@ -24,6 +26,8 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
     <ClerkProvider>
       <html lang='en'>
         <body className={figtree.className}>
+          <Toaster toastOptions={toastOptions} />
+
           <ModalProvider />
           {children}
         </body>
