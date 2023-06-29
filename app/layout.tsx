@@ -6,6 +6,7 @@ import { Figtree } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 
 import { ICONS } from '@/lib/constants';
+import ModalProvider from '@/lib/providers/_modal';
 
 import './globals.scss';
 
@@ -22,7 +23,10 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <ClerkProvider>
       <html lang='en'>
-        <body className={figtree.className}>{children}</body>
+        <body className={figtree.className}>
+          <ModalProvider />
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );

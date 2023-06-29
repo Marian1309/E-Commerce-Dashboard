@@ -17,7 +17,6 @@ const baseRules = {
     '<THIRD_PARTY_MODULES>',
     '^@/types$',
     '^@/lib/(.*)$',
-    '^@/context/(.*)$',
     '^@/hooks/(.*)$',
     '^(@/common/(.*)$)|^(@/common$)',
     '^@/styles/(.*)$',
