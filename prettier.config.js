@@ -19,6 +19,7 @@ const baseRules = {
     '^@/lib/(.*)$',
     '^@/hooks/(.*)$',
     '^(@/common/(.*)$)|^(@/common$)',
+    '^(@/components/(.*)$)|^(@/components$)',
     '^@/styles/(.*)$',
     '^@/app/(.*)$',
     '^[./]'

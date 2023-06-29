@@ -53,7 +53,10 @@ module.exports = {
     'no-confusing-arrow': 'off',
     'function-paren-newline': 'off',
     'operator-linebreak': 'off',
-    'react/jsx-one-expression-per-line': 'off'
+    'react/jsx-one-expression-per-line': 'off',
+    'react/jsx-no-constructed-context-values': 'off',
+    'no-use-before-define': 'off',
+    indent: 'off'
   },
   globals: {
     process: true,
