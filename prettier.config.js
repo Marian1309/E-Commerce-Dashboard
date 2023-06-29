@@ -16,7 +16,7 @@ const baseRules = {
     '^(next/(.*)$)|^(next$)',
     '<THIRD_PARTY_MODULES>',
     '^@/types$',
-    '^@/libs/(.*)$',
+    '^@/lib/(.*)$',
     '^@/context/(.*)$',
     '^@/hooks/(.*)$',
     '^(@/common/(.*)$)|^(@/common$)',

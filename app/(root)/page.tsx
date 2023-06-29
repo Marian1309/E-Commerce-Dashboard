@@ -1,9 +1,9 @@
-import { Button } from '@/common/ui';
+import { UserButton } from '@clerk/nextjs';
 
 const Home = () => {
   return (
     <div className='p-4'>
-      <Button>Click me</Button>
+      <UserButton afterSignOutUrl='/' />
     </div>
   );
 };
