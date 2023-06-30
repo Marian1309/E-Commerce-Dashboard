@@ -1,6 +1,6 @@
 export type Route = {
   id: number;
   href: string;
-  label: 'Settings' | 'Overview';
+  label: string;
   active: boolean;
 };

@@ -3,7 +3,7 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
-import { AlertModal, StoreModal } from '@/common/modals';
+import { StoreModal } from '@/common/modals';
 
 const ModalProvider: FC = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -19,7 +19,6 @@ const ModalProvider: FC = () => {
   return (
     <>
       <StoreModal />
-      <AlertModal />
     </>
   );
 };

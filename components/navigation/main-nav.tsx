@@ -24,6 +24,12 @@ const MainNav: FC<MainNavProps> = ({ className, ...props }) => {
     },
     {
       id: 2,
+      href: `/${params.storeId}/billboards`,
+      label: 'Billboards',
+      active: pathanme === `/${params.storeId}/billboards`
+    },
+    {
+      id: 3,
       href: `/${params.storeId}/settings`,
       label: 'Settings',
       active: pathanme === `/${params.storeId}/settings`
