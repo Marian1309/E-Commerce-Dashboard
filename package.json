@@ -18,7 +18,8 @@
     "format": "cross-env TAILWIND=true pretty-quick --staged",
     "db:push": "prisma db push",
     "migrate": "prisma migrate dev",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "db:reset": "prisma migrate reset && pnpm db:push"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.21.12",

@@ -42,7 +42,7 @@ const StoreModal: FC = () => {
 
       const { data } = await axios.post<Store>(API.createStore, formData);
 
-      toast.success(`Store ${data.name} created.`);
+      window.location.assign(`/${data.id}`);
     } catch (err: unknown) {
       toast.error('Somrthing went wrong.');
     } finally {

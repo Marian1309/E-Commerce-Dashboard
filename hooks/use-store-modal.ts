@@ -9,7 +9,7 @@ interface UseStoreModal {
 }
 
 const useStoreModal = create<UseStoreModal>((set) => ({
-  isOpen: true,
+  isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
   isLoading: false,

@@ -1,6 +1,8 @@
+import type { NextPage } from 'next';
+
 import { SignUp } from '@clerk/nextjs';
 
-const Page = () => {
+const Page: NextPage = () => {
   return <SignUp />;
 };
 
