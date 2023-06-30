@@ -35,6 +35,7 @@ const DashboardLayout = async ({ children, params }: DashboardLayoutProps) => {
 
   return (
     <>
+      {/* @ts-expect-error server component */}
       <Navbar />
       {children}
     </>

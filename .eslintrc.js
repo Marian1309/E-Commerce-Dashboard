@@ -57,7 +57,8 @@ module.exports = {
     'react/jsx-no-constructed-context-values': 'off',
     'no-use-before-define': 'off',
     indent: 'off',
-    'jsx-a11y/heading-has-content': 'off'
+    'jsx-a11y/heading-has-content': 'off',
+    'react/jsx-curly-newline': 'off'
   },
   globals: {
     process: true,

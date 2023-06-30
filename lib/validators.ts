@@ -7,8 +7,6 @@ export type FormSchema = z.infer<typeof formSchema>;
 
 export const billboardFormSchema = z.object({
   label: z.string().min(1),
-  imageUrl: z
-    .any()
-    .refine((files) => files?.[0].length === 0, 'Image is required.')
+  imageUrl: z.any().refine((files) => files?.length > 0, 'Image is required.')
 });
 export type BillboardFormSchema = z.infer<typeof billboardFormSchema>;

@@ -6,16 +6,14 @@ import { useParams, useRouter } from 'next/navigation';
 
 import { Plus } from 'lucide-react';
 
-import { Heading } from '@/common/ui';
+import { DataTable, Heading } from '@/common/ui';
 import { Button } from '@/common/ui/button';
-import { Separator } from '@/common/ui/separator';
+
+import type { BillboardColumn } from './columns';
+import { columns } from './columns';
 
 interface BillboardClientProps {
-  data: {
-    id: string;
-    label: string;
-    createdAt: string;
-  }[];
+  data: BillboardColumn[];
 }
 
 const BillboardClient: FC<BillboardClientProps> = ({ data }) => {
@@ -38,7 +36,7 @@ const BillboardClient: FC<BillboardClientProps> = ({ data }) => {
         </Button>
       </div>
 
-      <Separator />
+      <DataTable columns={columns} data={data} searchKey='label' />
     </>
   );
 };
