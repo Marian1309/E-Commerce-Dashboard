@@ -22,6 +22,7 @@ const baseRules = {
     '^(@/components/(.*)$)|^(@/components$)',
     '^@/styles/(.*)$',
     '^@/app/(.*)$',
+    '^[../]',
     '^[./]'
   ],
   importOrderSeparation: true,
