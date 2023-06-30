@@ -18,6 +18,12 @@ const MainNav: FC<MainNavProps> = ({ className, ...props }) => {
   const routes: Route[] = [
     {
       id: 1,
+      href: `/${params.storeId}`,
+      label: 'Overview',
+      active: pathanme === `/${params.storeId}`
+    },
+    {
+      id: 2,
       href: `/${params.storeId}/settings`,
       label: 'Settings',
       active: pathanme === `/${params.storeId}/settings`

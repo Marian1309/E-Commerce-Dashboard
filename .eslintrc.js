@@ -56,7 +56,8 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-no-constructed-context-values': 'off',
     'no-use-before-define': 'off',
-    indent: 'off'
+    indent: 'off',
+    'jsx-a11y/heading-has-content': 'off'
   },
   globals: {
     process: true,
