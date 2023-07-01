@@ -19,7 +19,7 @@
     "db:push": "prisma db push",
     "migrate": "prisma migrate dev",
     "studio": "prisma studio",
-    "db:reset": "prisma migrate reset && pnpm db:push",
+    "db:reset": "prisma migrate reset -y && pnpm db:push",
     "shadcn": "npx shadcn-ui@latest add -y"
   },
   "dependencies": {

@@ -47,7 +47,6 @@ const ImageUpload: FC<ImageUploadProps> = ({
           >
             <div className='absolute right-2 top-2 z-10'>
               <Button
-                className=''
                 onClick={() => onRemove(url)}
                 variant='destructive'
                 size='icon'

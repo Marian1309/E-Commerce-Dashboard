@@ -1,7 +1,6 @@
 'use client';
 
 import type { FC } from 'react';
-import { useState } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
@@ -14,6 +13,8 @@ import { toast } from 'react-hot-toast';
 
 import type { BillboardFormSchema } from '@/lib/validators';
 import { billboardFormSchema } from '@/lib/validators';
+
+import { useBillboardIdStore } from '@/hooks';
 
 import { AlertModal } from '@/common/modals';
 import { Heading, ImageUpload } from '@/common/ui';
@@ -33,9 +34,8 @@ interface SettingsFormProps {
   initialData: Billboard | null;
 }
 
-const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
-  const [open, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
+  const { isOpen, setIsOpen, isLoading, setIsLoading } = useBillboardIdStore();
 
   const router = useRouter();
   const params = useParams() as { storeId: string; billboardId: string };
@@ -94,15 +94,15 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       );
     } finally {
       setIsLoading(false);
-      setOpen(false);
+      setIsOpen(false);
     }
   };
 
   return (
     <>
       <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}
         isLoading={isLoading}
       />
@@ -114,7 +114,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
           <Button
             variant='destructive'
             size='icon'
-            onClick={() => setOpen(true)}
+            onClick={() => setIsOpen(true)}
             disabled={isLoading}
           >
             <Trash className='h-4 w-4' />
@@ -135,6 +135,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Background image</FormLabel>
+
                 <FormControl>
                   <ImageUpload
                     value={field.value ? [field.value] : []}
@@ -156,6 +157,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Label</FormLabel>
+
                   <FormControl>
                     <Input
                       disabled={isLoading}
@@ -181,4 +183,4 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
   );
 };
 
-export default SettingsForm;
+export default BillboardForm;

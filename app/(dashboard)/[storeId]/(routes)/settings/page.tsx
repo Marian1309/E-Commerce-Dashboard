@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import { auth } from '@clerk/nextjs';
 
-import { prismadb } from '@/lib/db';
+import { getUserFirstStore } from '@/actions';
 
 import { SettingsForm } from './components';
 
@@ -19,12 +19,7 @@ const Settings = async ({ params }: SettingsProps) => {
     redirect('/sign-in');
   }
 
-  const store = await prismadb.store.findFirst({
-    where: {
-      id: params.storeId,
-      userId
-    }
-  });
+  const store = await getUserFirstStore(userId, params.storeId);
 
   if (!store) {
     redirect('/');

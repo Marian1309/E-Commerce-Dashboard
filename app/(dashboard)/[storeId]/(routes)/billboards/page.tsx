@@ -1,18 +1,12 @@
-import { prismadb } from '@/lib/db';
 import { formatDate } from '@/lib/utils';
+
+import { getUserBillboards } from '@/actions';
 
 import { BillboardClient } from './components';
 import type { BillboardColumn } from './components/columns';
 
 const Billboards = async ({ params }: { params: { storeId: string } }) => {
-  const billboards = await prismadb.billboard.findMany({
-    where: {
-      storeId: params.storeId
-    },
-    orderBy: {
-      createdAt: 'desc'
-    }
-  });
+  const billboards = await getUserBillboards(params.storeId);
 
   const formattedBillboards: BillboardColumn[] = billboards.map(
     (billboard) => ({

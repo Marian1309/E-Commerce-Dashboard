@@ -1,7 +1,6 @@
 'use client';
 
 import type { FC } from 'react';
-import { useState } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
@@ -15,7 +14,7 @@ import { toast } from 'react-hot-toast';
 import type { FormSchema } from '@/lib/validators';
 import { formSchema } from '@/lib/validators';
 
-import useOrigin from '@/hooks/use-origin';
+import { useOrigin, useSettingsStore } from '@/hooks';
 
 import { AlertModal } from '@/common/modals';
 import { ApiAlert, Heading } from '@/common/ui';
@@ -25,7 +24,8 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel
+  FormLabel,
+  FormMessage
 } from '@/common/ui/form';
 import { Input } from '@/common/ui/input';
 import { Separator } from '@/common/ui/separator';
@@ -35,8 +35,7 @@ interface SettingsFormProps {
 }
 
 const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
-  const [open, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { isOpen, isLoading, setIsOpen, setIsLoading } = useSettingsStore();
 
   const router = useRouter();
   const params = useParams() as { storeId: string };
@@ -57,7 +56,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
 
       await axios.patch(`/api/stores/${params.storeId}`, formData);
       router.refresh();
-      toast.success('Store updated.');
+      toast.success(`Store ${form.watch('name')} updated.`);
     } catch (err: any) {
       toast.error('Something went wrong.');
     } finally {
@@ -77,15 +76,15 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       toast.error('Make sure you removed all products and categories first');
     } finally {
       setIsLoading(false);
-      setOpen(false);
+      setIsOpen(false);
     }
   };
 
   return (
     <>
       <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
         onConfirm={handleDelete}
         isLoading={isLoading}
       />
@@ -96,7 +95,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
         <Button
           variant='destructive'
           size='icon'
-          onClick={() => setOpen(true)}
+          onClick={() => setIsOpen(true)}
           disabled={isLoading}
         >
           <Trash className='h-4 w-4' />
@@ -117,6 +116,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Name</FormLabel>
+
                   <FormControl>
                     <Input
                       disabled={isLoading}
@@ -124,6 +124,8 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
                       {...field}
                     />
                   </FormControl>
+
+                  <FormMessage />
                 </FormItem>
               )}
             />

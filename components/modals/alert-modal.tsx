@@ -37,7 +37,7 @@ const AlertModal: FC<AlertModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
     >
-      <div className='w-full items-center justify-end space-x-2 pt-6'>
+      <div className='flex w-full items-center justify-end space-x-2 pt-6'>
         <Button disabled={isLoading} variant='outline' onClick={onClose}>
           Cancel
         </Button>

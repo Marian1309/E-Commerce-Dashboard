@@ -1,13 +1,16 @@
+import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { auth } from '@clerk/nextjs';
 
 import { prismadb } from '@/lib/db';
 
-export async function GET(
-  _: Request,
-  { params }: { params: { billboardId: string } }
-) {
+type BillboardIdType = (
+  req: NextRequest,
+  { params }: { params: { billboardId: string; storeId: string } }
+) => void;
+
+export const GET: BillboardIdType = async (_, { params }) => {
   try {
     if (!params.billboardId) {
       return new NextResponse('Billboard id is required', { status: 400 });
@@ -19,17 +22,14 @@ export async function GET(
       }
     });
 
-    return NextResponse.json(billboard);
-  } catch (error) {
-    console.log('[BILLBOARD_GET]', error);
+    return NextResponse.json(billboard, { status: 200 });
+  } catch (err: unknown) {
+    console.log('[BILLBOARDID_GET]', err);
     return new NextResponse('Internal error', { status: 500 });
   }
-}
+};
 
-export async function DELETE(
-  _: Request,
-  { params }: { params: { billboardId: string; storeId: string } }
-) {
+export const DELETE: BillboardIdType = async (_, { params }) => {
   try {
     const { userId } = auth();
 
@@ -58,17 +58,14 @@ export async function DELETE(
       }
     });
 
-    return NextResponse.json(billboard);
-  } catch (error) {
-    console.log('[BILLBOARD_DELETE]', error);
+    return NextResponse.json(billboard, { status: 200 });
+  } catch (err: unknown) {
+    console.log('[BILLBOARDID_DELETE]', err);
     return new NextResponse('Internal error', { status: 500 });
   }
-}
+};
 
-export async function PATCH(
-  req: Request,
-  { params }: { params: { billboardId: string; storeId: string } }
-) {
+export const PATCH: BillboardIdType = async (req, { params }) => {
   try {
     const { userId } = auth();
 
@@ -113,9 +110,9 @@ export async function PATCH(
       }
     });
 
-    return NextResponse.json(billboard);
-  } catch (error) {
-    console.log('[BILLBOARD_PATCH]', error);
+    return NextResponse.json(billboard, { status: 200 });
+  } catch (err: unknown) {
+    console.log('[BILLBOARDID_PATCH]', err);
     return new NextResponse('Internal error', { status: 500 });
   }
-}
+};

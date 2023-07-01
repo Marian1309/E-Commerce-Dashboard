@@ -5,10 +5,12 @@ import { auth } from '@clerk/nextjs';
 
 import { prismadb } from '@/lib/db';
 
-export const POST = async (
+type BillboardsRoute = (
   req: NextRequest,
   { params }: { params: { storeId: string } }
-) => {
+) => void;
+
+export const POST: BillboardsRoute = async (req, { params }) => {
   try {
     const { userId } = auth();
     const { label, imageUrl } = await req.json();
@@ -48,17 +50,14 @@ export const POST = async (
       }
     });
 
-    return NextResponse.json(billboard);
+    return NextResponse.json(billboard, { status: 200 });
   } catch (err: unknown) {
     console.log('[BILLBOARDS_POST]', err);
-    return new NextResponse('Internal errro', { status: 500 });
+    return new NextResponse('Internal error', { status: 500 });
   }
 };
 
-export const GET = async (
-  _: NextRequest,
-  { params }: { params: { storeId: string } }
-) => {
+export const GET: BillboardsRoute = async (_, { params }) => {
   try {
     if (!params.storeId) {
       return new NextResponse('Store id is required', { status: 400 });
@@ -70,9 +69,9 @@ export const GET = async (
       }
     });
 
-    return NextResponse.json(billboards);
+    return NextResponse.json(billboards, { status: 200 });
   } catch (err: unknown) {
     console.log('[BILLBOARDS_GET]', err);
-    return new NextResponse('Internal errro', { status: 500 });
+    return new NextResponse('Internal error', { status: 500 });
   }
 };

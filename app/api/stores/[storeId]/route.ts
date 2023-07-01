@@ -5,15 +5,15 @@ import { auth } from '@clerk/nextjs';
 
 import { prismadb } from '@/lib/db';
 
-type Patch = (
+type StoreIdRoute = (
   req: NextRequest,
   { params }: { params: { storeId: string } }
 ) => void;
 
-export const PATCH: Patch = async (req, { params }) => {
+export const PATCH: StoreIdRoute = async (req, { params }) => {
   try {
     const { userId } = auth();
-    const { name } = (await req.json()) as { name: string };
+    const { name } = await req.json();
 
     if (!userId) {
       return new NextResponse('Unauthorized', { status: 401 });
@@ -39,12 +39,12 @@ export const PATCH: Patch = async (req, { params }) => {
 
     return NextResponse.json(store, { status: 200 });
   } catch (err: unknown) {
-    console.log('[STORES_PATCH]', err);
+    console.log('[STORES_ID_PATCH]', err);
     return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
-export const DELETE: Patch = async (_, { params }) => {
+export const DELETE: StoreIdRoute = async (_, { params }) => {
   try {
     const { userId } = auth();
 
@@ -65,7 +65,7 @@ export const DELETE: Patch = async (_, { params }) => {
 
     return NextResponse.json(store, { status: 200 });
   } catch (err: unknown) {
-    console.log('[STORES_DELETE]', err);
+    console.log('[STORES_ID_DELETE]', err);
     return new NextResponse('Internal Error', { status: 500 });
   }
 };

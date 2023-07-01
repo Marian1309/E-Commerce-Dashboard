@@ -11,7 +11,7 @@ Description
 
 - [Next.js](https://nextjs.org)
 - [TypeScript](https://www.typescriptlang.org)
-- [Next Auth](https://next-auth.js.org)
+- [Clerk Auth](https://clerk.com)
 - [Prisma ORM](https://www.prisma.io)
 - [Tailwind CSS](https://tailwindcss.com)
 
