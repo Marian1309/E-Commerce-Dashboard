@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '@/common/ui/button';
 
-import { Modal } from '../ui';
+import { Modal } from '../ui/self';
 
 interface AlertModalProps {
   isOpen: boolean;

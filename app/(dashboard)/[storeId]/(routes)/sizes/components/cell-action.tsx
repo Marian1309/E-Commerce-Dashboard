@@ -1,6 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
+import { useState } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
@@ -8,7 +9,7 @@ import axios from 'axios';
 import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
-import { useSizeIdStore } from '@/hooks';
+import { copyToClipboard } from '@/lib/utils';
 
 import { AlertModal } from '@/common/modals';
 import { Button } from '@/common/ui/button';
@@ -27,15 +28,11 @@ interface CellActionProps {
 }
 
 const CellAction: FC<CellActionProps> = ({ data }) => {
-  const { isOpen, isLoading, setIsOpen, setIsLoading } = useSizeIdStore();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const router = useRouter();
   const params = useParams() as { storeId: string; billboardId: string };
-
-  const onCopy = (id: string) => {
-    navigator.clipboard.writeText(id);
-    toast.success('Size Id copied to the clipboard.');
-  };
 
   const handleDelete = async () => {
     try {
@@ -74,7 +71,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
 
           <DropdownMenuItem
             className='cursor-pointer'
-            onClick={() => onCopy(data.id)}
+            onClick={() => copyToClipboard(data.id, 'Size Id')}
           >
             <Copy className='mr-2 h-4 w-4' />
             Copy Id

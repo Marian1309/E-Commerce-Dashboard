@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { auth } from '@clerk/nextjs';
 
-import { prismadb } from '@/lib/db';
+import prismaClient from '@/lib/db';
 
 type BillboardIdType = (
   req: NextRequest,
@@ -16,7 +16,7 @@ export const GET: BillboardIdType = async (_, { params }) => {
       return new NextResponse('Size id is required', { status: 400 });
     }
 
-    const size = await prismadb.size.findUnique({
+    const size = await prismaClient.size.findUnique({
       where: {
         id: params.sizeId
       }
@@ -41,7 +41,7 @@ export const DELETE: BillboardIdType = async (_, { params }) => {
       return new NextResponse('Size id is required', { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismaClient.store.findFirst({
       where: {
         id: params.storeId,
         userId
@@ -52,7 +52,7 @@ export const DELETE: BillboardIdType = async (_, { params }) => {
       return new NextResponse('Unauthorized', { status: 405 });
     }
 
-    const size = await prismadb.size.delete({
+    const size = await prismaClient.size.delete({
       where: {
         id: params.sizeId
       }
@@ -89,7 +89,7 @@ export const PATCH: BillboardIdType = async (req, { params }) => {
       return new NextResponse('Size id is required', { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismaClient.store.findFirst({
       where: {
         id: params.storeId,
         userId
@@ -100,7 +100,7 @@ export const PATCH: BillboardIdType = async (req, { params }) => {
       return new NextResponse('Unauthorized', { status: 405 });
     }
 
-    const size = await prismadb.size.updateMany({
+    const size = await prismaClient.size.updateMany({
       where: {
         id: params.sizeId
       },

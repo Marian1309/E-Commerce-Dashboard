@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 
-interface UseSizesStore {
+interface UseSizeFormStore {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
 }
 
-const useSizesStore = create<UseSizesStore>((set) => ({
+const useSizeFormStore = create<UseSizeFormStore>((set) => ({
   isOpen: false,
   setIsOpen: (isOpen) => set({ isOpen }),
   isLoading: false,
   setIsLoading: (isLoading) => set({ isLoading })
 }));
 
-export default useSizesStore;
+export default useSizeFormStore;

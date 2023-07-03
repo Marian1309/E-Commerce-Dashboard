@@ -1,4 +1,4 @@
-import { getUniqueSize } from '@/actions';
+import prismaClient from '@/lib/db';
 
 import { SizeForm } from './components';
 
@@ -9,13 +9,15 @@ interface BillboardPageProps {
 }
 
 const SizePage = async ({ params }: BillboardPageProps) => {
-  const size = await getUniqueSize(params.sizeId);
+  const size = await prismaClient.size.findUnique({
+    where: {
+      id: params.sizeId
+    }
+  });
 
   return (
-    <div className='flex-col'>
-      <div className='flex-1 space-y-4 p-8 pt-6'>
-        <SizeForm initialData={size} />
-      </div>
+    <div className='flex-1 space-y-4 p-8 pt-6'>
+      <SizeForm initialData={size} />
     </div>
   );
 };

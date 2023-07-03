@@ -2,16 +2,16 @@
 
 import type { FC } from 'react';
 
-import useStoreModal from '@/hooks/use-store-modal';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Store } from '@prisma/client';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-import { API } from '@/lib/constants';
 import type { FormSchema } from '@/lib/validators';
 import { formSchema } from '@/lib/validators';
+
+import { useModalStore } from '@/hooks/stores';
 
 import { Button } from '@/common/ui/button';
 import {
@@ -24,10 +24,11 @@ import {
 } from '@/common/ui/form';
 import { Input } from '@/common/ui/input';
 
-import { Modal } from '../ui';
+import { Modal } from '../ui/self';
 
 const StoreModal: FC = () => {
-  const { isOpen, onClose, isLoading, setIsLoading } = useStoreModal();
+  const { isOpen, onClose, isLoading, setIsLoading } = useModalStore();
+
   const form = useForm<FormSchema>({
     defaultValues: {
       name: ''
@@ -39,7 +40,7 @@ const StoreModal: FC = () => {
     try {
       setIsLoading(true);
 
-      const { data } = await axios.post<Store>(API.createStore, formData);
+      const { data } = await axios.post<Store>('/api/stores', formData);
 
       window.location.assign(`/${data.id}`);
     } catch (err: unknown) {

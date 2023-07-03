@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 
 import { auth } from '@clerk/nextjs';
 
-import { getUserFirstStore } from '@/actions';
+import prismaClient from '@/lib/db';
 
 import { Navbar } from '@/common/navigation';
 
@@ -22,7 +22,12 @@ const DashboardLayout = async ({ children, params }: DashboardLayoutProps) => {
     redirect('/sign-in');
   }
 
-  const store = await getUserFirstStore(userId, params.storeId);
+  const store = await prismaClient.store.findFirst({
+    where: {
+      userId,
+      id: params.storeId
+    }
+  });
 
   if (!store) {
     redirect('/');

@@ -16,11 +16,7 @@ const ModalProvider: FC = () => {
     return null;
   }
 
-  return (
-    <>
-      <StoreModal />
-    </>
-  );
+  return <StoreModal />;
 };
 
 export default ModalProvider;

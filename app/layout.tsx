@@ -7,7 +7,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { Toaster } from 'react-hot-toast';
 
 import { ICONS } from '@/lib/constants';
-import ModalProvider from '@/lib/providers/_modal';
+import { ModalProvider } from '@/lib/providers';
 import { toastOptions } from '@/lib/toast';
 
 import './globals.scss';

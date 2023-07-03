@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import { auth } from '@clerk/nextjs';
 
-import { getUserFirstStore } from '@/actions';
+import prismaClient from '@/lib/db';
 
 import { SettingsForm } from './components';
 
@@ -19,17 +19,20 @@ const Settings = async ({ params }: SettingsProps) => {
     redirect('/sign-in');
   }
 
-  const store = await getUserFirstStore(userId, params.storeId);
+  const store = await prismaClient.store.findFirst({
+    where: {
+      userId,
+      id: params.storeId
+    }
+  });
 
   if (!store) {
     redirect('/');
   }
 
   return (
-    <div className='flex-col'>
-      <div className='flex-1 space-y-4 p-8'>
-        <SettingsForm initialData={store} />
-      </div>
+    <div className='flex-1 space-y-4 p-4'>
+      <SettingsForm initialData={store} />
     </div>
   );
 };

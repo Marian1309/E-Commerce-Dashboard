@@ -22,7 +22,7 @@ import {
   TableRow
 } from '@/components/ui/table';
 
-import { Separator } from './separator';
+import { Separator } from '../separator';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

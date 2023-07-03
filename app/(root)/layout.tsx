@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 
 import { auth } from '@clerk/nextjs';
 
-import { getUserFirstStore } from '@/actions';
+import prismaClient from '@/lib/db';
 
 const SetupLayout = async ({ children }: { children: ReactNode }) => {
   const { userId } = auth();
@@ -13,7 +13,11 @@ const SetupLayout = async ({ children }: { children: ReactNode }) => {
     redirect('/sign-in');
   }
 
-  const store = await getUserFirstStore(userId);
+  const store = await prismaClient.store.findFirst({
+    where: {
+      userId
+    }
+  });
 
   if (store) {
     redirect(`/${store.id}`);

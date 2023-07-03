@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 
-interface UseCategoryIdStore {
+interface UseCategoryFormStore {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
 }
 
-const useCategoryIdStore = create<UseCategoryIdStore>((set) => ({
+const useCategoryFormStore = create<UseCategoryFormStore>((set) => ({
   isOpen: false,
   setIsOpen: (isOpen) => set({ isOpen }),
   isLoading: false,
   setIsLoading: (isLoading) => set({ isLoading })
 }));
 
-export default useCategoryIdStore;
+export default useCategoryFormStore;

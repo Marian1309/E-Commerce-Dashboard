@@ -14,10 +14,9 @@ import { toast } from 'react-hot-toast';
 import type { CategoryFormSchema } from '@/lib/validators';
 import { categoryFormSchema } from '@/lib/validators';
 
-import { useCategoryIdStore } from '@/hooks';
+import { useCategoryFormStore } from '@/hooks/stores';
 
 import { AlertModal } from '@/common/modals';
-import { Heading } from '@/common/ui';
 import { Button } from '@/common/ui/button';
 import {
   Form,
@@ -35,6 +34,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/common/ui/select';
+import { Heading } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface SettingsFormProps {
@@ -43,7 +43,7 @@ interface SettingsFormProps {
 }
 
 const CategoryForm: FC<SettingsFormProps> = ({ initialData, billboards }) => {
-  const { isOpen, setIsOpen, isLoading, setIsLoading } = useCategoryIdStore();
+  const { isOpen, setIsOpen, isLoading, setIsLoading } = useCategoryFormStore();
 
   const router = useRouter();
   const params = useParams() as {
@@ -81,7 +81,7 @@ const CategoryForm: FC<SettingsFormProps> = ({ initialData, billboards }) => {
       router.refresh();
       router.push(`/${params.storeId}/categories`);
       toast.success(toastMessage);
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error('Something went wrong.');
     } finally {
       setIsLoading(false);
@@ -97,8 +97,8 @@ const CategoryForm: FC<SettingsFormProps> = ({ initialData, billboards }) => {
       );
       router.refresh();
       router.push(`/${params.storeId}/categories`);
-      toast.success(`Category ${form.watch('name')} deleted.`);
-    } catch (error: any) {
+      toast.success(`Category \`${form.watch('name')}\` deleted.`);
+    } catch (error: unknown) {
       toast.error(
         'Make sure you removed all products using this category first.'
       );

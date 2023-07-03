@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import type { NextPage } from 'next';
 
-import { useModalStore } from '@/hooks';
+import { useModalStore } from '@/hooks/stores';
 
 const SetupPage: NextPage = () => {
   const { onOpen, isOpen } = useModalStore();
@@ -15,7 +15,7 @@ const SetupPage: NextPage = () => {
     }
   }, [isOpen, onOpen]);
 
-  return <div className='p-4'>Root page</div>;
+  return null;
 };
 
 export default SetupPage;

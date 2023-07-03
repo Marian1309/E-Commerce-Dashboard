@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { auth } from '@clerk/nextjs';
 
-import { prismadb } from '@/lib/db';
+import prismaClient from '@/lib/db';
 
 type BillboardsRoute = (
   req: NextRequest,
@@ -31,7 +31,7 @@ export const POST: BillboardsRoute = async (req, { params }) => {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismaClient.store.findFirst({
       where: {
         id: params.storeId,
         userId
@@ -42,7 +42,7 @@ export const POST: BillboardsRoute = async (req, { params }) => {
       return new NextResponse('Unauthorized', { status: 403 });
     }
 
-    const size = await prismadb.size.create({
+    const size = await prismaClient.size.create({
       data: {
         name,
         value,
@@ -63,7 +63,7 @@ export const GET: BillboardsRoute = async (_, { params }) => {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
-    const sizes = await prismadb.size.findMany({
+    const sizes = await prismaClient.size.findMany({
       where: {
         storeId: params.storeId
       }

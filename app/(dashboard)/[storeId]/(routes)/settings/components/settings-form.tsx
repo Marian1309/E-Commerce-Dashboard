@@ -14,10 +14,10 @@ import { toast } from 'react-hot-toast';
 import type { FormSchema } from '@/lib/validators';
 import { formSchema } from '@/lib/validators';
 
-import { useOrigin, useSettingsStore } from '@/hooks';
+import { useOrigin } from '@/hooks';
+import { useSettingsStore } from '@/hooks/stores';
 
 import { AlertModal } from '@/common/modals';
-import { ApiAlert, Heading } from '@/common/ui';
 import { Button } from '@/common/ui/button';
 import {
   Form,
@@ -28,6 +28,7 @@ import {
   FormMessage
 } from '@/common/ui/form';
 import { Input } from '@/common/ui/input';
+import { ApiAlert, Heading } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface SettingsFormProps {
@@ -56,7 +57,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
 
       await axios.patch(`/api/stores/${params.storeId}`, formData);
       router.refresh();
-      toast.success(`Store ${form.watch('name')} updated.`);
+      toast.success(`Store \`${form.watch('name')}\` updated.`);
     } catch (err: any) {
       toast.error('Something went wrong.');
     } finally {
@@ -71,7 +72,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       await axios.delete(`/api/stores/${params.storeId}`);
       router.refresh();
       router.push('/');
-      toast.success(`Store ${form.watch('name')} deleted.`);
+      toast.success(`Store \`${form.watch('name')}\` deleted.`);
     } catch (err: any) {
       toast.error('Make sure you removed all products and categories first');
     } finally {

@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 
-interface UseBillboardIdStore {
+interface UseBillboardFormStore {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
 }
 
-const useBillboardIdStore = create<UseBillboardIdStore>((set) => ({
+const useBillboardFormStore = create<UseBillboardFormStore>((set) => ({
   isOpen: false,
   setIsOpen: (isOpen) => set({ isOpen }),
   isLoading: false,
   setIsLoading: (isLoading) => set({ isLoading })
 }));
 
-export default useBillboardIdStore;
+export default useBillboardFormStore;

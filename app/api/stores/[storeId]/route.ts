@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { auth } from '@clerk/nextjs';
 
-import { prismadb } from '@/lib/db';
+import prismaClient from '@/lib/db';
 
 type StoreIdRoute = (
   req: NextRequest,
@@ -27,7 +27,7 @@ export const PATCH: StoreIdRoute = async (req, { params }) => {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
-    const store = await prismadb.store.updateMany({
+    const store = await prismaClient.store.updateMany({
       where: {
         id: params.storeId,
         userId
@@ -56,7 +56,7 @@ export const DELETE: StoreIdRoute = async (_, { params }) => {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
-    const store = await prismadb.store.deleteMany({
+    const store = await prismaClient.store.deleteMany({
       where: {
         id: params.storeId,
         userId

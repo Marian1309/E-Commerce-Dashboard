@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { auth } from '@clerk/nextjs';
 
-import { prismadb } from '@/lib/db';
+import prismaClient from '@/lib/db';
 
 type BillboardIdType = (
   req: NextRequest,
@@ -16,7 +16,7 @@ export const GET: BillboardIdType = async (_, { params }) => {
       return new NextResponse('Billboard id is required', { status: 400 });
     }
 
-    const billboard = await prismadb.billboard.findUnique({
+    const billboard = await prismaClient.billboard.findUnique({
       where: {
         id: params.billboardId
       }
@@ -41,7 +41,7 @@ export const DELETE: BillboardIdType = async (_, { params }) => {
       return new NextResponse('Billboard id is required', { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismaClient.store.findFirst({
       where: {
         id: params.storeId,
         userId
@@ -52,7 +52,7 @@ export const DELETE: BillboardIdType = async (_, { params }) => {
       return new NextResponse('Unauthorized', { status: 405 });
     }
 
-    const billboard = await prismadb.billboard.delete({
+    const billboard = await prismaClient.billboard.delete({
       where: {
         id: params.billboardId
       }
@@ -89,7 +89,7 @@ export const PATCH: BillboardIdType = async (req, { params }) => {
       return new NextResponse('Billboard id is required', { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeByUserId = await prismaClient.store.findFirst({
       where: {
         id: params.storeId,
         userId
@@ -100,7 +100,7 @@ export const PATCH: BillboardIdType = async (req, { params }) => {
       return new NextResponse('Unauthorized', { status: 405 });
     }
 
-    const billboard = await prismadb.billboard.updateMany({
+    const billboard = await prismaClient.billboard.updateMany({
       where: {
         id: params.billboardId
       },

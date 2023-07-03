@@ -3,12 +3,13 @@
 import type { FC } from 'react';
 
 import { Copy, Server } from 'lucide-react';
-import { toast } from 'react-hot-toast';
 
-import { Alert, AlertDescription, AlertTitle } from './alert';
-import type { BadgeProps } from './badge';
-import { Badge } from './badge';
-import { Button } from './button';
+import { copyToClipboard } from '@/lib/utils';
+
+import { Alert, AlertDescription, AlertTitle } from '../alert';
+import type { BadgeProps } from '../badge';
+import { Badge } from '../badge';
+import { Button } from '../button';
 
 interface ApiAlertProps {
   title: string;
@@ -31,11 +32,6 @@ const ApiAlert: FC<ApiAlertProps> = ({
   description,
   variant = 'public'
 }) => {
-  const onCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast.success('API Route copied to the clipboard.');
-  };
-
   return (
     <Alert>
       <Server className='h-4 w-4' />
@@ -52,7 +48,7 @@ const ApiAlert: FC<ApiAlertProps> = ({
         <Button
           variant='outline'
           size='icon'
-          onClick={() => onCopy(description)}
+          onClick={() => copyToClipboard(description, 'API Route')}
         >
           <Copy className='h-4 w-4' />
         </Button>

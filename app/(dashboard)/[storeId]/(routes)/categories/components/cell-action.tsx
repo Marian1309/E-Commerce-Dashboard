@@ -1,6 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
+import { useState } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
@@ -8,7 +9,7 @@ import axios from 'axios';
 import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
-import { useCategoryIdStore } from '@/hooks';
+import { copyToClipboard } from '@/lib/utils';
 
 import { AlertModal } from '@/common/modals';
 import { Button } from '@/common/ui/button';
@@ -27,15 +28,11 @@ interface CellActionProps {
 }
 
 const CellAction: FC<CellActionProps> = ({ data }) => {
-  const { isOpen, isLoading, setIsOpen, setIsLoading } = useCategoryIdStore();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const router = useRouter();
   const params = useParams() as { storeId: string; billboardId: string };
-
-  const onCopy = (id: string) => {
-    navigator.clipboard.writeText(id);
-    toast.success('Billboard Id copied to the clipboard.');
-  };
 
   const handleDelete = async () => {
     try {
@@ -44,9 +41,9 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
       await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
       router.refresh();
       toast.success(`Category \`${data.name}\` deleted.`);
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(
-        'Make sure you removed all categories using this billboard first.'
+        'Make sure you removed all categories using this category first.'
       );
     } finally {
       setIsLoading(false);
@@ -76,7 +73,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
 
           <DropdownMenuItem
             className='cursor-pointer'
-            onClick={() => onCopy(data.id)}
+            onClick={() => copyToClipboard(data.id, 'Category Id')}
           >
             <Copy className='mr-2 h-4 w-4' />
             Copy Id
@@ -85,7 +82,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
           <DropdownMenuItem
             className='cursor-pointer'
             onClick={() =>
-              router.push(`/${params.storeId}/billboards/${data.id}`)
+              router.push(`/${params.storeId}/categories/${data.id}`)
             }
           >
             <Edit className='mr-2 h-4 w-4' />

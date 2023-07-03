@@ -14,10 +14,9 @@ import { toast } from 'react-hot-toast';
 import type { BillboardFormSchema } from '@/lib/validators';
 import { billboardFormSchema } from '@/lib/validators';
 
-import { useBillboardIdStore } from '@/hooks';
+import { useBillboardFormStore } from '@/hooks/stores';
 
 import { AlertModal } from '@/common/modals';
-import { Heading, ImageUpload } from '@/common/ui';
 import { Button } from '@/common/ui/button';
 import {
   Form,
@@ -28,6 +27,7 @@ import {
   FormMessage
 } from '@/common/ui/form';
 import { Input } from '@/common/ui/input';
+import { Heading, ImageUpload } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface SettingsFormProps {
@@ -35,7 +35,8 @@ interface SettingsFormProps {
 }
 
 const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
-  const { isOpen, setIsOpen, isLoading, setIsLoading } = useBillboardIdStore();
+  const { isOpen, setIsOpen, isLoading, setIsLoading } =
+    useBillboardFormStore();
 
   const router = useRouter();
   const params = useParams() as { storeId: string; billboardId: string };
@@ -87,8 +88,8 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
       );
       router.refresh();
       router.push(`/${params.storeId}/billboards`);
-      toast.success(`Billboard ${form.watch('label')} deleted.`);
-    } catch (error: any) {
+      toast.success(`Billboard \`${form.watch('label')}\` deleted.`);
+    } catch (error: unknown) {
       toast.error(
         'Make sure you removed all categories using this billboard first.'
       );

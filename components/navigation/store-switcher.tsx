@@ -1,6 +1,6 @@
 'use client';
 
-import type { ComponentPropsWithoutRef, FC } from 'react';
+import type { FC } from 'react';
 import { useState } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
@@ -15,7 +15,7 @@ import {
 
 import { cn } from '@/lib/utils';
 
-import useStoreModal from '@/hooks/use-store-modal';
+import { useModalStore } from '@/hooks/stores';
 
 import { Button } from '@/common/ui/button';
 import {
@@ -29,18 +29,17 @@ import {
 } from '@/common/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/common/ui/popover';
 
-type PopoverTriggerProps = ComponentPropsWithoutRef<typeof PopoverTrigger>;
-
-interface StoreSwitcherProps extends PopoverTriggerProps {
+interface StoreSwitcherProps {
   items: Store[];
+  className?: string;
 }
 
 const StoreSwitcher: FC<StoreSwitcherProps> = ({ className, items = [] }) => {
   const params = useParams() as { storeId: string };
   const { push } = useRouter();
 
-  const storeModal = useStoreModal();
-  const [open, setOpen] = useState(false);
+  const storeModal = useModalStore();
+  const [open, setOpen] = useState<boolean>(false);
 
   const formattedItems = items.map((item) => ({
     label: item.name,
@@ -77,7 +76,9 @@ const StoreSwitcher: FC<StoreSwitcherProps> = ({ className, items = [] }) => {
         <Command>
           <CommandList>
             <CommandInput placeholder='Search store...' />
+
             <CommandEmpty>No store found.</CommandEmpty>
+
             <CommandGroup heading='Stores'>
               {formattedItems.map((store) => (
                 <CommandItem

@@ -9,6 +9,8 @@ import axios from 'axios';
 import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
+import { copyToClipboard } from '@/lib/utils';
+
 import { AlertModal } from '@/common/modals';
 import { Button } from '@/common/ui/button';
 import {
@@ -32,19 +34,14 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams() as { storeId: string; billboardId: string };
 
-  const onCopy = (id: string) => {
-    navigator.clipboard.writeText(id);
-    toast.success('Billboard Id copied to the clipboard.');
-  };
-
   const handleDelete = async () => {
     try {
       setIsLoading(true);
 
       await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
       router.refresh();
-      toast.success(`Store ${data.label} deleted.`);
-    } catch (error: any) {
+      toast.success(`Store \`${data.label}\` deleted.`);
+    } catch (error: unknown) {
       toast.error(
         'Make sure you removed all categories using this billboard first.'
       );
@@ -76,7 +73,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
 
           <DropdownMenuItem
             className='cursor-pointer'
-            onClick={() => onCopy(data.id)}
+            onClick={() => copyToClipboard(data.id, 'Billboard Id')}
           >
             <Copy className='mr-2 h-4 w-4' />
             Copy Id

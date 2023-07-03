@@ -1,11 +1,3 @@
-const API = {
-  createStore: '/api/stores'
+export const ICONS = {
+  favicon: '/icons/favicon.png'
 };
-
-const ICONS = {
-  favicon: '/icons/favicon.ico'
-};
-
-const IMAGES = {};
-
-export { API, ICONS, IMAGES };

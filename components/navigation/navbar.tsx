@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import { UserButton, auth } from '@clerk/nextjs';
 
-import { getUserStores } from '@/actions';
+import prismaClient from '@/lib/db';
 
 import MainNav from './main-nav';
 import StoreSwitcher from './store-switcher';
@@ -14,7 +14,11 @@ const Navbar = async () => {
     redirect('/sign-in');
   }
 
-  const stores = await getUserStores(userId);
+  const stores = await prismaClient.store.findMany({
+    where: {
+      userId
+    }
+  });
 
   return (
     <div className='border-b'>
@@ -24,7 +28,7 @@ const Navbar = async () => {
         <MainNav className='mx-6' />
 
         <div className='ml-auto flex items-center space-x-4'>
-          <UserButton afterSignOutUrl='/' />
+          <UserButton afterSignOutUrl='/' userProfileMode='navigation' />
         </div>
       </div>
     </div>

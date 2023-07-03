@@ -14,10 +14,9 @@ import { toast } from 'react-hot-toast';
 import type { SizeFormSchema } from '@/lib/validators';
 import { sizeFormSchema } from '@/lib/validators';
 
-import { useBillboardIdStore } from '@/hooks';
+import { useSizeFormStore } from '@/hooks/stores';
 
 import { AlertModal } from '@/common/modals';
-import { Heading } from '@/common/ui';
 import { Button } from '@/common/ui/button';
 import {
   Form,
@@ -28,6 +27,7 @@ import {
   FormMessage
 } from '@/common/ui/form';
 import { Input } from '@/common/ui/input';
+import { Heading } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface SizesFormProps {
@@ -35,7 +35,7 @@ interface SizesFormProps {
 }
 
 const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
-  const { isOpen, setIsOpen, isLoading, setIsLoading } = useBillboardIdStore();
+  const { isOpen, setIsOpen, isLoading, setIsLoading } = useSizeFormStore();
 
   const router = useRouter();
   const params = useParams() as { storeId: string; billboardId: string };
@@ -69,7 +69,7 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
       router.refresh();
       router.push(`/${params.storeId}/sizes`);
       toast.success(toastMessage);
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error('Something went wrong.');
     } finally {
       setIsLoading(false);
@@ -83,8 +83,8 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
       await axios.delete(`/api/${params.storeId}/sizes/${params.billboardId}`);
       router.refresh();
       router.push(`/${params.storeId}/sizes`);
-      toast.success(`Size ${form.watch('name')} deleted.`);
-    } catch (error: any) {
+      toast.success(`Size \`${form.watch('name')}\` deleted.`);
+    } catch (error: unknown) {
       toast.error('Make sure you removed all products using this size first.');
     } finally {
       setIsLoading(false);
