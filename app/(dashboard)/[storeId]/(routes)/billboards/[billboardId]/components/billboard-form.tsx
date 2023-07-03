@@ -87,7 +87,7 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
       );
       router.refresh();
       router.push(`/${params.storeId}/billboards`);
-      toast.success(`Store ${form.watch('label')} deleted.`);
+      toast.success(`Billboard ${form.watch('label')} deleted.`);
     } catch (error: any) {
       toast.error(
         'Make sure you removed all categories using this billboard first.'
