@@ -16,3 +16,9 @@ export const categoryFormSchema = z.object({
   billboardId: z.string().min(1)
 });
 export type CategoryFormSchema = z.infer<typeof categoryFormSchema>;
+
+export const sizeFormSchema = z.object({
+  name: z.string().min(1),
+  value: z.string().min(1)
+});
+export type SizeFormSchema = z.infer<typeof sizeFormSchema>;

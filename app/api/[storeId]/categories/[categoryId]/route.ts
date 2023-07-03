@@ -103,7 +103,7 @@ export const PATCH: BillboardIdType = async (req, { params }) => {
       return new NextResponse('Unauthorized', { status: 405 });
     }
 
-    const category = await prismadb.category.update({
+    const category = await prismadb.category.updateMany({
       where: {
         id: params.categoryId
       },

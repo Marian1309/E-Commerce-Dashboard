@@ -9,3 +9,7 @@ export { default as getUniqueBillboard } from './billboards/get-unique-billboard
 // Categories
 export { default as getUserCategories } from './categories/get-user-categories';
 export { default as getUniqueCategory } from './categories/get-unique-category';
+
+// Sizes
+export { default as getUserSizes } from './sizes/get-user-sizes';
+export { default as getUniqueSize } from './sizes/get-unique-size';
