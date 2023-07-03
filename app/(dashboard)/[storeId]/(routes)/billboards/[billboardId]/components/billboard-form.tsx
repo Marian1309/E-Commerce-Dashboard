@@ -53,7 +53,7 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
   const toastMessage = initialData
     ? 'Billboard updated.'
     : 'Billboard created.';
-  const action = initialData ? 'Sve changes' : 'Create billboard';
+  const action = initialData ? 'Save changes' : 'Create billboard';
 
   const onSubmit = async (formData: BillboardFormSchema) => {
     try {

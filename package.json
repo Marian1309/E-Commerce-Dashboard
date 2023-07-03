@@ -19,8 +19,8 @@
     "db:push": "prisma db push",
     "migrate": "prisma migrate dev",
     "studio": "prisma studio",
-    "db:reset": "prisma migrate reset -y && pnpm db:push",
-    "shadcn": "npx shadcn-ui@latest add -y"
+    "db:reset": "prisma migrate reset && pnpm db:push",
+    "shadcn": "npx shadcn-ui@latest add"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.21.12",
@@ -31,6 +31,7 @@
     "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.6",
+    "@radix-ui/react-select": "^1.2.2",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@tanstack/react-query": "^4.29.17",

@@ -2,11 +2,13 @@ import { getUniqueBillboard } from '@/actions';
 
 import { BillboardForm } from './components';
 
-const BillboardPage = async ({
-  params
-}: {
-  params: { billboardId: string };
-}) => {
+interface BillboardPageProps {
+  params: {
+    billboardId: string;
+  };
+}
+
+const BillboardPage = async ({ params }: BillboardPageProps) => {
   const billboard = await getUniqueBillboard(params.billboardId);
 
   return (
