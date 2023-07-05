@@ -4,8 +4,6 @@ import type { FC } from 'react';
 
 import { useParams } from 'next/navigation';
 
-import { useOrigin } from '@/hooks';
-
 import ApiAlert from './api-alert';
 
 interface ApiListProps {
@@ -15,9 +13,8 @@ interface ApiListProps {
 
 const ApiList: FC<ApiListProps> = ({ entityIdName, entityName }) => {
   const params = useParams() as { storeId: string };
-  const origin = useOrigin();
 
-  const baseUrl = `${origin}/api/${params.storeId}`;
+  const baseUrl = `${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/${params.storeId}`;
 
   return (
     <>

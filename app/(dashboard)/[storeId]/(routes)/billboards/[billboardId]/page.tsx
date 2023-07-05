@@ -3,16 +3,12 @@ import prismaClient from '@/lib/db';
 import { BillboardForm } from './components';
 
 interface BillboardPageProps {
-  params: {
-    billboardId: string;
-  };
+  params: { billboardId: string };
 }
 
 const BillboardPage = async ({ params }: BillboardPageProps) => {
   const billboard = await prismaClient.billboard.findUnique({
-    where: {
-      id: params.billboardId
-    }
+    where: { id: params.billboardId }
   });
 
   return (

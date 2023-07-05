@@ -9,6 +9,8 @@ import axios from 'axios';
 import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
+import type { DropdownMenuItem as DropdownMenuItemType } from '@/types';
+
 import { copyToClipboard } from '@/lib/utils';
 
 import { AlertModal } from '@/common/modals';
@@ -16,10 +18,10 @@ import { Button } from '@/common/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/common/ui/dropdown-menu';
+import { DropdownMenuContentList } from '@/common/ui/self';
 
 import type { SizesColumn } from './columns';
 
@@ -34,12 +36,35 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams() as { storeId: string; billboardId: string };
 
-  const handleDelete = async () => {
+  const DROPDOWN_MENU_ITEMS: DropdownMenuItemType[] = [
+    {
+      id: 1,
+      label: 'Copy Id',
+      onClick: () => copyToClipboard(data.id, 'Size Id'),
+      icon: Copy
+    },
+    {
+      id: 2,
+      label: 'Update',
+      onClick: () => router.push(`/${params.storeId}/sizes/${data.id}`),
+      icon: Edit
+    },
+    {
+      id: 3,
+      label: 'Delete',
+      onClick: () => setIsOpen(true),
+      icon: Trash
+    }
+  ];
+
+  const handleSizeDeleting = async () => {
     try {
       setIsLoading(true);
 
       await axios.delete(`/api/${params.storeId}/sizes/${data.id}`);
+
       router.refresh();
+
       toast.success(`Size \`${data.name}\` deleted.`);
     } catch (error: any) {
       toast.error('Make sure you removed all products using this size first.');
@@ -54,7 +79,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
       <AlertModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        onConfirm={handleDelete}
+        onConfirm={handleSizeDeleting}
         isLoading={isLoading}
       />
 
@@ -69,29 +94,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align='end'>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() => copyToClipboard(data.id, 'Size Id')}
-          >
-            <Copy className='mr-2 h-4 w-4' />
-            Copy Id
-          </DropdownMenuItem>
-
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() => router.push(`/${params.storeId}/sizes/${data.id}`)}
-          >
-            <Edit className='mr-2 h-4 w-4' />
-            Update
-          </DropdownMenuItem>
-
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() => setIsOpen(true)}
-          >
-            <Trash className='mr-2 h-4 w-4' />
-            Delete
-          </DropdownMenuItem>
+          <DropdownMenuContentList dropdownMenuItems={DROPDOWN_MENU_ITEMS} />
         </DropdownMenuContent>
       </DropdownMenu>
     </>

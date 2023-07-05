@@ -9,6 +9,11 @@ import axios from 'axios';
 import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
+import type {
+  BillboardColumn,
+  DropdownMenuItem as DropdownMenuItemType
+} from '@/types';
+
 import { copyToClipboard } from '@/lib/utils';
 
 import { AlertModal } from '@/common/modals';
@@ -16,12 +21,10 @@ import { Button } from '@/common/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/common/ui/dropdown-menu';
-
-import type { BillboardColumn } from './columns';
+import { DropdownMenuContentList } from '@/common/ui/self';
 
 interface CellActionProps {
   data: BillboardColumn;
@@ -34,12 +37,35 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams() as { storeId: string; billboardId: string };
 
-  const handleDelete = async () => {
+  const DROPDOWN_MENU_ITEMS: DropdownMenuItemType[] = [
+    {
+      id: 1,
+      label: 'Copy Id',
+      onClick: () => copyToClipboard(data.id, 'Billboard Id'),
+      icon: Copy
+    },
+    {
+      id: 2,
+      label: 'Update',
+      onClick: () => router.push(`/${params.storeId}/billboards/${data.id}`),
+      icon: Edit
+    },
+    {
+      id: 3,
+      label: 'Delete',
+      onClick: () => setOpen(true),
+      icon: Trash
+    }
+  ];
+
+  const handleBillboardDeleting = async () => {
     try {
       setIsLoading(true);
 
       await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+
       router.refresh();
+
       toast.success(`Store \`${data.label}\` deleted.`);
     } catch (error: unknown) {
       toast.error(
@@ -56,7 +82,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
       <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
-        onConfirm={handleDelete}
+        onConfirm={handleBillboardDeleting}
         isLoading={isLoading}
       />
 
@@ -71,31 +97,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align='end'>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() => copyToClipboard(data.id, 'Billboard Id')}
-          >
-            <Copy className='mr-2 h-4 w-4' />
-            Copy Id
-          </DropdownMenuItem>
-
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() =>
-              router.push(`/${params.storeId}/billboards/${data.id}`)
-            }
-          >
-            <Edit className='mr-2 h-4 w-4' />
-            Update
-          </DropdownMenuItem>
-
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() => setOpen(true)}
-          >
-            <Trash className='mr-2 h-4 w-4' />
-            Delete
-          </DropdownMenuItem>
+          <DropdownMenuContentList dropdownMenuItems={DROPDOWN_MENU_ITEMS} />
         </DropdownMenuContent>
       </DropdownMenu>
     </>

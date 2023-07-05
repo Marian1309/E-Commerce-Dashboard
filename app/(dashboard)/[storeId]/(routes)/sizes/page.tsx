@@ -1,8 +1,11 @@
+import type { SizeColumn } from '@/types';
+
 import prismaClient from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 
-import type { SizesColumn } from './components';
-import { BillboardClient } from './components';
+import Client from '@/common/ui/self/client';
+
+import { columns } from './components/columns';
 
 const Sizes = async ({ params }: { params: { storeId: string } }) => {
   const sizes = await prismaClient.size.findMany({
@@ -14,7 +17,7 @@ const Sizes = async ({ params }: { params: { storeId: string } }) => {
     }
   });
 
-  const formattedSizes: SizesColumn[] = sizes.map(
+  const formattedSizes: SizeColumn[] = sizes.map(
     ({ id, name, value, createdAt }) => ({
       id,
       name,
@@ -25,7 +28,12 @@ const Sizes = async ({ params }: { params: { storeId: string } }) => {
 
   return (
     <div className='flex-1 space-x-4 pt-6'>
-      <BillboardClient data={formattedSizes} />
+      <Client
+        data={formattedSizes}
+        columns={columns}
+        headerTile='Categories'
+        searchKey='name'
+      />
     </div>
   );
 };

@@ -4,8 +4,7 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/common/ui/button';
-
-import { Modal } from '../ui/self';
+import { Modal } from '@/common/ui/self';
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -37,7 +36,7 @@ const AlertModal: FC<AlertModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
     >
-      <div className='flex w-full items-center justify-end space-x-2 pt-6'>
+      <div className='w-full space-x-2 pt-6 flex-end'>
         <Button disabled={isLoading} variant='outline' onClick={onClose}>
           Cancel
         </Button>

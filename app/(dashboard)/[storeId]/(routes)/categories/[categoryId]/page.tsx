@@ -11,15 +11,11 @@ interface CategoryPageProps {
 
 const CategoryPage = async ({ params }: CategoryPageProps) => {
   const category = await prismaClient.category.findUnique({
-    where: {
-      id: params.categoryId
-    }
+    where: { id: params.categoryId }
   });
 
   const billboards = await prismaClient.billboard.findMany({
-    where: {
-      storeId: params.storeId
-    }
+    where: { storeId: params.storeId }
   });
 
   return (

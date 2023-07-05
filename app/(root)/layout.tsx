@@ -14,9 +14,7 @@ const SetupLayout = async ({ children }: { children: ReactNode }) => {
   }
 
   const store = await prismaClient.store.findFirst({
-    where: {
-      userId
-    }
+    where: { userId }
   });
 
   if (store) {

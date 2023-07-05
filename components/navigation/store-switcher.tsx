@@ -15,7 +15,7 @@ import {
 
 import { cn } from '@/lib/utils';
 
-import { useModalStore } from '@/hooks/stores';
+import { useStoreModalStore } from '@/hooks/stores';
 
 import { Button } from '@/common/ui/button';
 import {
@@ -38,7 +38,7 @@ const StoreSwitcher: FC<StoreSwitcherProps> = ({ className, items = [] }) => {
   const params = useParams() as { storeId: string };
   const { push } = useRouter();
 
-  const storeModal = useModalStore();
+  const storeModal = useStoreModalStore();
   const [open, setOpen] = useState<boolean>(false);
 
   const formattedItems = items.map((item) => ({
@@ -50,9 +50,14 @@ const StoreSwitcher: FC<StoreSwitcherProps> = ({ className, items = [] }) => {
     (item) => item.value === params.storeId
   );
 
-  const onStoreSelect = (store: { value: string; label: string }) => {
+  const handleStoreSelect = (store: { value: string; label: string }) => {
     setOpen(false);
     push(`/${store.value}`);
+  };
+
+  const handleStoreCreateSelect = () => {
+    setOpen(false);
+    storeModal.onOpen();
   };
 
   return (
@@ -83,7 +88,7 @@ const StoreSwitcher: FC<StoreSwitcherProps> = ({ className, items = [] }) => {
               {formattedItems.map((store) => (
                 <CommandItem
                   key={store.value}
-                  onSelect={() => onStoreSelect(store)}
+                  onSelect={() => handleStoreSelect(store)}
                   className='text-sm'
                 >
                   <StoreIcon className='mr-2' />
@@ -105,12 +110,7 @@ const StoreSwitcher: FC<StoreSwitcherProps> = ({ className, items = [] }) => {
 
           <CommandList>
             <CommandGroup>
-              <CommandItem
-                onSelect={() => {
-                  setOpen(false);
-                  storeModal.onOpen();
-                }}
-              >
+              <CommandItem onSelect={handleStoreCreateSelect}>
                 <PlusCircle className='mr-2 h-5 w-5' />
                 Create Store
               </CommandItem>

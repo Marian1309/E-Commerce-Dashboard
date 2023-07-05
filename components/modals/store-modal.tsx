@@ -11,7 +11,7 @@ import { toast } from 'react-hot-toast';
 import type { FormSchema } from '@/lib/validators';
 import { formSchema } from '@/lib/validators';
 
-import { useModalStore } from '@/hooks/stores';
+import { useStoreModalStore } from '@/hooks/stores';
 
 import { Button } from '@/common/ui/button';
 import {
@@ -23,20 +23,17 @@ import {
   FormMessage
 } from '@/common/ui/form';
 import { Input } from '@/common/ui/input';
-
-import { Modal } from '../ui/self';
+import { Modal } from '@/common/ui/self';
 
 const StoreModal: FC = () => {
-  const { isOpen, onClose, isLoading, setIsLoading } = useModalStore();
+  const { isOpen, onClose, isLoading, setIsLoading } = useStoreModalStore();
 
   const form = useForm<FormSchema>({
-    defaultValues: {
-      name: ''
-    },
+    defaultValues: { name: '' },
     resolver: zodResolver(formSchema)
   });
 
-  const handleSubmit = async (formData: FormSchema) => {
+  const handleCreatingStore = async (formData: FormSchema) => {
     try {
       setIsLoading(true);
 
@@ -59,7 +56,7 @@ const StoreModal: FC = () => {
     >
       <div className='space-y-4 py-2 pb-4'>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <form onSubmit={form.handleSubmit(handleCreatingStore)}>
             <FormField
               control={form.control}
               name='name'
@@ -80,7 +77,7 @@ const StoreModal: FC = () => {
               )}
             />
 
-            <div className='flex items-center justify-end space-x-2 pt-6'>
+            <div className='space-x-2 pt-6 flex-end'>
               <Button variant='outline' onClick={onClose} disabled={isLoading}>
                 Cancel
               </Button>

@@ -86,6 +86,11 @@ module.exports = {
           alignItems: 'center',
           justifyContent: 'space-between'
         },
+        '.flex-end': {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end'
+        },
         '.full': {
           width: '100%',
           height: '100%'

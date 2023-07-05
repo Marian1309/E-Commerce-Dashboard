@@ -9,6 +9,11 @@ import axios from 'axios';
 import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
+import type {
+  CategoryColumn,
+  DropdownMenuItem as DropdownMenuItemType
+} from '@/types';
+
 import { copyToClipboard } from '@/lib/utils';
 
 import { AlertModal } from '@/common/modals';
@@ -16,12 +21,10 @@ import { Button } from '@/common/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/common/ui/dropdown-menu';
-
-import type { CategoryColumn } from './columns';
+import { DropdownMenuContentList } from '@/common/ui/self';
 
 interface CellActionProps {
   data: CategoryColumn;
@@ -34,12 +37,35 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams() as { storeId: string; billboardId: string };
 
+  const DROPDOWN_MENU_ITEMS: DropdownMenuItemType[] = [
+    {
+      id: 1,
+      label: 'Copy Id',
+      onClick: () => copyToClipboard(data.id, 'Category Id'),
+      icon: Copy
+    },
+    {
+      id: 2,
+      label: 'Update',
+      onClick: () => router.push(`/${params.storeId}/categories/${data.id}`),
+      icon: Edit
+    },
+    {
+      id: 3,
+      label: 'Delete',
+      onClick: () => setIsOpen(true),
+      icon: Trash
+    }
+  ];
+
   const handleDelete = async () => {
     try {
       setIsLoading(true);
 
       await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
+
       router.refresh();
+
       toast.success(`Category \`${data.name}\` deleted.`);
     } catch (error: unknown) {
       toast.error(
@@ -71,31 +97,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
         <DropdownMenuContent align='end'>
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() => copyToClipboard(data.id, 'Category Id')}
-          >
-            <Copy className='mr-2 h-4 w-4' />
-            Copy Id
-          </DropdownMenuItem>
-
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() =>
-              router.push(`/${params.storeId}/categories/${data.id}`)
-            }
-          >
-            <Edit className='mr-2 h-4 w-4' />
-            Update
-          </DropdownMenuItem>
-
-          <DropdownMenuItem
-            className='cursor-pointer'
-            onClick={() => setIsOpen(true)}
-          >
-            <Trash className='mr-2 h-4 w-4' />
-            Delete
-          </DropdownMenuItem>
+          <DropdownMenuContentList dropdownMenuItems={DROPDOWN_MENU_ITEMS} />
         </DropdownMenuContent>
       </DropdownMenu>
     </>

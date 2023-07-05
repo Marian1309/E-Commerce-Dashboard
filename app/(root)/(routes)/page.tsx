@@ -4,10 +4,10 @@ import { useEffect } from 'react';
 
 import type { NextPage } from 'next';
 
-import { useModalStore } from '@/hooks/stores';
+import { useStoreModalStore } from '@/hooks/stores';
 
 const SetupPage: NextPage = () => {
-  const { onOpen, isOpen } = useModalStore();
+  const { onOpen, isOpen } = useStoreModalStore();
 
   useEffect(() => {
     if (!isOpen) {

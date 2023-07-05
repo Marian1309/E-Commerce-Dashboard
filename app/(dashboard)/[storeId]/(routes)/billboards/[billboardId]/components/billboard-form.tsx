@@ -56,7 +56,7 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
     : 'Billboard created.';
   const action = initialData ? 'Save changes' : 'Create billboard';
 
-  const onSubmit = async (formData: BillboardFormSchema) => {
+  const handleBillboardCreating = async (formData: BillboardFormSchema) => {
     try {
       setIsLoading(true);
 
@@ -71,6 +71,7 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
 
       router.refresh();
       router.push(`/${params.storeId}/billboards`);
+
       toast.success(toastMessage);
     } catch (err: any) {
       toast.error('Something went wrong.');
@@ -79,15 +80,17 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
     }
   };
 
-  const handleDelete = async () => {
+  const handleBillboardDeleting = async () => {
     try {
       setIsLoading(true);
 
       await axios.delete(
         `/api/${params.storeId}/billboards/${params.billboardId}`
       );
+
       router.refresh();
       router.push(`/${params.storeId}/billboards`);
+
       toast.success(`Billboard \`${form.watch('label')}\` deleted.`);
     } catch (error: unknown) {
       toast.error(
@@ -104,7 +107,7 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
       <AlertModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        onConfirm={handleDelete}
+        onConfirm={handleBillboardDeleting}
         isLoading={isLoading}
       />
 
@@ -127,7 +130,7 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
 
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(handleBillboardCreating)}
           className='w-full space-y-8'
         >
           <FormField

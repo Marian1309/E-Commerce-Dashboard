@@ -12,7 +12,7 @@ export const formatDate = (date: Date, format: string) => {
   return dayjs(date).format(format);
 };
 
-export const copyToClipboard = (id: string, whatCopied: string) => {
-  navigator.clipboard.writeText(id);
+export const copyToClipboard = (text: string, whatCopied: string) => {
+  navigator.clipboard.writeText(text);
   toast.success(`${whatCopied} copied to the clipboard.`);
 };

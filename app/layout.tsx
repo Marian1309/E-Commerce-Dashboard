@@ -29,6 +29,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
           <Toaster toastOptions={toastOptions} />
 
           <ModalProvider />
+
           {children}
         </body>
       </html>

@@ -1,4 +1,4 @@
-export { default as useModalStore } from './use-modal';
+export { default as useStoreModalStore } from './use-store-modal';
 export { default as useSettingsStore } from './use-settings';
 
 // Forms identical context

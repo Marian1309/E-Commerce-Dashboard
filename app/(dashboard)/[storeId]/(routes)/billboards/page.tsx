@@ -1,8 +1,11 @@
+import type { BillboardColumn } from '@/types';
+
 import prismaClient from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 
-import type { BillboardColumn } from './components';
-import { BillboardClient } from './components';
+import { Client } from '@/common/ui/self';
+
+import { columns } from './components/columns';
 
 const Billboards = async ({ params }: { params: { storeId: string } }) => {
   const billboards = await prismaClient.billboard.findMany({
@@ -24,7 +27,12 @@ const Billboards = async ({ params }: { params: { storeId: string } }) => {
 
   return (
     <div className='flex-1 space-x-4 pt-6'>
-      <BillboardClient data={formattedBillboards} />
+      <Client
+        data={formattedBillboards}
+        columns={columns}
+        headerTile='Billboards'
+        searchKey='label'
+      />
     </div>
   );
 };

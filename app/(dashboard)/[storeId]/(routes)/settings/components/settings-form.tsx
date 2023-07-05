@@ -14,7 +14,6 @@ import { toast } from 'react-hot-toast';
 import type { FormSchema } from '@/lib/validators';
 import { formSchema } from '@/lib/validators';
 
-import { useOrigin } from '@/hooks';
 import { useSettingsStore } from '@/hooks/stores';
 
 import { AlertModal } from '@/common/modals';
@@ -40,14 +39,13 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
 
   const router = useRouter();
   const params = useParams() as { storeId: string };
-  const origin = useOrigin();
 
   const form = useForm<FormSchema>({
     defaultValues: initialData,
     resolver: zodResolver(formSchema)
   });
 
-  const onSubmit = async (formData: FormSchema) => {
+  const handleStoreNameChanging = async (formData: FormSchema) => {
     if (formData.name === initialData.name) {
       return toast.error('Type something different.');
     }
@@ -56,7 +54,9 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       setIsLoading(true);
 
       await axios.patch(`/api/stores/${params.storeId}`, formData);
+
       router.refresh();
+
       toast.success(`Store \`${form.watch('name')}\` updated.`);
     } catch (err: any) {
       toast.error('Something went wrong.');
@@ -65,13 +65,15 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
     }
   };
 
-  const handleDelete = async () => {
+  const handleStoreDelete = async () => {
     try {
       setIsLoading(true);
 
       await axios.delete(`/api/stores/${params.storeId}`);
+
       router.refresh();
       router.push('/');
+
       toast.success(`Store \`${form.watch('name')}\` deleted.`);
     } catch (err: any) {
       toast.error('Make sure you removed all products and categories first');
@@ -86,7 +88,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       <AlertModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        onConfirm={handleDelete}
+        onConfirm={handleStoreDelete}
         isLoading={isLoading}
       />
 
@@ -107,7 +109,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
 
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(handleStoreNameChanging)}
           className='w-full space-y-8'
         >
           <div className='grid grid-cols-3 gap-8'>
@@ -142,7 +144,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
 
       <ApiAlert
         title='NEXT_PUBLIC_API_URL'
-        description={`${origin}/api/${params.storeId}`}
+        description={`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/api/${params.storeId}`}
         variant='public'
       />
     </>

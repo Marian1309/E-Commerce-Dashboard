@@ -65,7 +65,7 @@ const CategoryForm: FC<SettingsFormProps> = ({ initialData, billboards }) => {
   const toastMessage = initialData ? 'Category updated.' : 'Category created.';
   const action = initialData ? 'Save changes' : 'Create category';
 
-  const onSubmit = async (formData: CategoryFormSchema) => {
+  const handleCategoryCreating = async (formData: CategoryFormSchema) => {
     try {
       setIsLoading(true);
 
@@ -80,6 +80,7 @@ const CategoryForm: FC<SettingsFormProps> = ({ initialData, billboards }) => {
 
       router.refresh();
       router.push(`/${params.storeId}/categories`);
+
       toast.success(toastMessage);
     } catch (err: unknown) {
       toast.error('Something went wrong.');
@@ -88,15 +89,17 @@ const CategoryForm: FC<SettingsFormProps> = ({ initialData, billboards }) => {
     }
   };
 
-  const handleDelete = async () => {
+  const handleCategoryDeleting = async () => {
     try {
       setIsLoading(true);
 
       await axios.delete(
         `/api/${params.storeId}/categories/${params.categoryId}`
       );
+
       router.refresh();
       router.push(`/${params.storeId}/categories`);
+
       toast.success(`Category \`${form.watch('name')}\` deleted.`);
     } catch (error: unknown) {
       toast.error(
@@ -113,7 +116,7 @@ const CategoryForm: FC<SettingsFormProps> = ({ initialData, billboards }) => {
       <AlertModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        onConfirm={handleDelete}
+        onConfirm={handleCategoryDeleting}
         isLoading={isLoading}
       />
 
@@ -136,7 +139,7 @@ const CategoryForm: FC<SettingsFormProps> = ({ initialData, billboards }) => {
 
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(handleCategoryCreating)}
           className='w-full space-y-8'
         >
           <div className='grid grid-cols-3 gap-8'>
