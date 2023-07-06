@@ -4,7 +4,13 @@ import type { LucideIcon } from 'lucide-react';
 export type Route = {
   id: number;
   href: string;
-  label: 'Overview' | 'Billboards' | 'Categories' | 'Sizes' | 'Settings';
+  label:
+    | 'Overview'
+    | 'Billboards'
+    | 'Categories'
+    | 'Sizes'
+    | 'Settings'
+    | 'Colors';
   active: boolean;
 };
 
@@ -35,9 +41,16 @@ export type SizeColumn = {
   createdAt: string;
 };
 
+export type ColorColumn = {
+  id: string;
+  name: string;
+  value: string;
+  createdAt: string;
+};
+
 export type ClientType = {
-  data: (BillboardColumn | CategoryColumn | SizeColumn)[];
+  data: (BillboardColumn | CategoryColumn | SizeColumn | ColorColumn)[];
   columns: ColumnDef<any>[];
-  headerTile: 'Billboards' | 'Categories' | 'Sizes';
+  headerTile: 'Billboards' | 'Categories' | 'Sizes' | 'Colors';
   searchKey: 'label' | 'name';
 };

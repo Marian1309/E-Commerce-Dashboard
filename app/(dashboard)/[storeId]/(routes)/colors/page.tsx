@@ -1,4 +1,4 @@
-import type { SizeColumn } from '@/types';
+import type { ColorColumn } from '@/types';
 
 import prismaClient from '@/lib/db';
 import { formatDate } from '@/lib/utils';
@@ -7,8 +7,8 @@ import Client from '@/common/ui/self/client';
 
 import { columns } from './components/columns';
 
-const Sizes = async ({ params }: { params: { storeId: string } }) => {
-  const sizes = await prismaClient.size.findMany({
+const Colors = async ({ params }: { params: { storeId: string } }) => {
+  const colors = await prismaClient.color.findMany({
     where: {
       storeId: params.storeId
     },
@@ -17,7 +17,7 @@ const Sizes = async ({ params }: { params: { storeId: string } }) => {
     }
   });
 
-  const formattedSizes: SizeColumn[] = sizes.map(
+  const formattedColors: ColorColumn[] = colors.map(
     ({ id, name, value, createdAt }) => ({
       id,
       name,
@@ -29,13 +29,13 @@ const Sizes = async ({ params }: { params: { storeId: string } }) => {
   return (
     <div className='flex-1 space-x-4 pt-6'>
       <Client
-        data={formattedSizes}
+        data={formattedColors}
         columns={columns}
-        headerTile='Sizes'
+        headerTile='Colors'
         searchKey='name'
       />
     </div>
   );
 };
 
-export default Sizes;
+export default Colors;

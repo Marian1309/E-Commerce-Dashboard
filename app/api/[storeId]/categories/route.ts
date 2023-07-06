@@ -5,12 +5,12 @@ import { auth } from '@clerk/nextjs';
 
 import prismaClient from '@/lib/db';
 
-type BillboardsRoute = (
+type CategoryRoute = (
   req: NextRequest,
   { params }: { params: { storeId: string } }
 ) => void;
 
-export const POST: BillboardsRoute = async (req, { params }) => {
+export const POST: CategoryRoute = async (req, { params }) => {
   try {
     const { userId } = auth();
     const { name, billboardId } = await req.json();
@@ -52,12 +52,12 @@ export const POST: BillboardsRoute = async (req, { params }) => {
 
     return NextResponse.json(category, { status: 200 });
   } catch (err: unknown) {
-    console.log('[CATEGORIES_POST]', err);
+    console.log('[CATEGORY_POST]', err);
     return new NextResponse('Internal error', { status: 500 });
   }
 };
 
-export const GET: BillboardsRoute = async (_, { params }) => {
+export const GET: CategoryRoute = async (_, { params }) => {
   try {
     if (!params.storeId) {
       return new NextResponse('Store id is required', { status: 400 });
@@ -71,7 +71,7 @@ export const GET: BillboardsRoute = async (_, { params }) => {
 
     return NextResponse.json(categories, { status: 200 });
   } catch (err: unknown) {
-    console.log('[CATEGORIES_GET]', err);
+    console.log('[CATEGORY_GET]', err);
     return new NextResponse('Internal error', { status: 500 });
   }
 };

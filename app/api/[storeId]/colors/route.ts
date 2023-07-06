@@ -5,26 +5,26 @@ import { auth } from '@clerk/nextjs';
 
 import prismaClient from '@/lib/db';
 
-type BillboardRoute = (
+type ColorsRoute = (
   req: NextRequest,
   { params }: { params: { storeId: string } }
 ) => void;
 
-export const POST: BillboardRoute = async (req, { params }) => {
+export const POST: ColorsRoute = async (req, { params }) => {
   try {
     const { userId } = auth();
-    const { label, imageUrl } = await req.json();
+    const { name, value } = await req.json();
 
     if (!userId) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    if (!label) {
-      return new NextResponse('Label is required', { status: 400 });
+    if (!name) {
+      return new NextResponse('Name is required', { status: 400 });
     }
 
-    if (!imageUrl) {
-      return new NextResponse('Image URL is required', { status: 400 });
+    if (!value) {
+      return new NextResponse('Value is required', { status: 400 });
     }
 
     if (!params.storeId) {
@@ -42,36 +42,36 @@ export const POST: BillboardRoute = async (req, { params }) => {
       return new NextResponse('Unauthorized', { status: 403 });
     }
 
-    const billboard = await prismaClient.billboard.create({
+    const color = await prismaClient.color.create({
       data: {
-        label,
-        imageUrl,
+        name,
+        value,
         storeId: params.storeId
       }
     });
 
-    return NextResponse.json(billboard, { status: 200 });
+    return NextResponse.json(color, { status: 200 });
   } catch (err: unknown) {
-    console.log('[BILLBOARDS_POST]', err);
+    console.log('[COLOR_POST]', err);
     return new NextResponse('Internal error', { status: 500 });
   }
 };
 
-export const GET: BillboardRoute = async (_, { params }) => {
+export const GET: ColorsRoute = async (_, { params }) => {
   try {
     if (!params.storeId) {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
-    const billboards = await prismaClient.billboard.findMany({
+    const colors = await prismaClient.color.findMany({
       where: {
         storeId: params.storeId
       }
     });
 
-    return NextResponse.json(billboards, { status: 200 });
+    return NextResponse.json(colors, { status: 200 });
   } catch (err: unknown) {
-    console.log('[BILLBOARDS_GET]', err);
+    console.log('[COLORS_GET]', err);
     return new NextResponse('Internal error', { status: 500 });
   }
 };

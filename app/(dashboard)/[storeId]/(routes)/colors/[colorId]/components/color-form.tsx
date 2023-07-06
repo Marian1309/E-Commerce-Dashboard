@@ -5,7 +5,7 @@ import type { FC } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { Size } from '@prisma/client';
+import type { Color } from '@prisma/client';
 import axios from 'axios';
 import { Trash } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -30,11 +30,11 @@ import { Input } from '@/common/ui/input';
 import { Heading } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
-interface SizesFormProps {
-  initialData: Size | null;
+interface ColorFormProps {
+  initialData: Color | null;
 }
 
-const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
+const ColorForm: FC<ColorFormProps> = ({ initialData }) => {
   const { isOpen, setIsOpen, isLoading, setIsLoading } = useSizeFormStore();
 
   const router = useRouter();
@@ -48,27 +48,26 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
     resolver: zodResolver(sizeFormSchema)
   });
 
-  const title = initialData ? 'Edit size' : 'Create size';
-  const description = initialData ? 'Edit a size' : 'Add a new size';
-  const toastMessage = initialData ? 'Size updated.' : 'Size created.';
-  const action = initialData ? 'Save changes' : 'Create size';
+  const title = initialData ? 'Edit color' : 'Create color';
+  const description = initialData ? 'Edit a color' : 'Add a new color';
+  const toastMessage = initialData ? 'Color updated.' : 'Color created.';
+  const action = initialData ? 'Save changes' : 'Create color';
 
-  const handleSizeCreatingOrUpdating = async (formData: SizeFormSchema) => {
+  const handleColorCreatingOrUpdating = async (formData: SizeFormSchema) => {
     try {
       setIsLoading(true);
 
       if (initialData) {
         await axios.patch(
-          `/api/${params.storeId}/sizes/${params.billboardId}`,
+          `/api/${params.storeId}/colors/${params.billboardId}`,
           formData
         );
       } else {
-        await axios.post(`/api/${params.storeId}/sizes`, formData);
+        await axios.post(`/api/${params.storeId}/colors`, formData);
       }
 
       router.refresh();
-      router.push(`/${params.storeId}/sizes`);
-
+      router.push(`/${params.storeId}/colors`);
       toast.success(toastMessage);
     } catch (err: unknown) {
       toast.error('Something went wrong.');
@@ -77,16 +76,16 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
     }
   };
 
-  const handleSizeDeleting = async () => {
+  const handleColorDeleting = async () => {
     try {
       setIsLoading(true);
 
-      await axios.delete(`/api/${params.storeId}/sizes/${params.billboardId}`);
+      await axios.delete(`/api/${params.storeId}/colors/${params.billboardId}`);
 
       router.refresh();
-      router.push(`/${params.storeId}/sizes`);
+      router.push(`/${params.storeId}/colors`);
 
-      toast.success(`Size \`${form.watch('name')}\` deleted.`);
+      toast.success(`Color \`${form.watch('name')}\` deleted.`);
     } catch (error: unknown) {
       toast.error('Make sure you removed all products using this size first.');
     } finally {
@@ -100,7 +99,7 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
       <AlertModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        onConfirm={handleSizeDeleting}
+        onConfirm={handleColorDeleting}
         isLoading={isLoading}
       />
 
@@ -123,7 +122,7 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
 
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleSizeCreatingOrUpdating)}
+          onSubmit={form.handleSubmit(handleColorCreatingOrUpdating)}
           className='w-full space-y-8'
         >
           <div className='grid grid-cols-3 gap-8'>
@@ -137,7 +136,7 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
                   <FormControl>
                     <Input
                       disabled={isLoading}
-                      placeholder='Size name'
+                      placeholder='Color name'
                       {...field}
                     />
                   </FormControl>
@@ -157,7 +156,7 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
                   <FormControl>
                     <Input
                       disabled={isLoading}
-                      placeholder='Size value'
+                      placeholder='Color value'
                       {...field}
                     />
                   </FormControl>
@@ -179,4 +178,4 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
   );
 };
 
-export default SizeForm;
+export default ColorForm;
