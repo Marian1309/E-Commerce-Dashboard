@@ -1,1 +1,0 @@
-- In all cell-action components two useState without context.

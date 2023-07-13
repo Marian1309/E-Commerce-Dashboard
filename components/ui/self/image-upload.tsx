@@ -69,6 +69,7 @@ const ImageUpload: FC<ImageUploadProps> = ({
           return (
             <Button disabled={disabled} variant='secondary' onClick={onClick}>
               <ImagePlus className='mr-2 h-4 w-4' />
+              <p>Upload an Image</p>
             </Button>
           );
         }}

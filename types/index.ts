@@ -10,7 +10,8 @@ export type Route = {
     | 'Categories'
     | 'Sizes'
     | 'Settings'
-    | 'Colors';
+    | 'Colors'
+    | 'Products';
   active: boolean;
 };
 
@@ -48,9 +49,27 @@ export type ColorColumn = {
   createdAt: string;
 };
 
+export type ProductColumn = {
+  id: string;
+  name: string;
+  price: string;
+  size: string;
+  category: string;
+  color: string;
+  isFeatured: boolean;
+  isArchived: boolean;
+  createdAt: string;
+};
+
 export type ClientType = {
-  data: (BillboardColumn | CategoryColumn | SizeColumn | ColorColumn)[];
+  data: (
+    | BillboardColumn
+    | CategoryColumn
+    | SizeColumn
+    | ColorColumn
+    | ProductColumn
+  )[];
   columns: ColumnDef<any>[];
-  headerTile: 'Billboards' | 'Categories' | 'Sizes' | 'Colors';
+  headerTile: 'Billboards' | 'Categories' | 'Sizes' | 'Colors' | 'Products';
   searchKey: 'label' | 'name';
 };
