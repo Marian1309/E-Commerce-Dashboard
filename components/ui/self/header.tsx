@@ -9,7 +9,13 @@ import Heading from './heading';
 
 interface HeaderProps {
   dataArrayLength: number;
-  title: 'Billboards' | 'Categories' | 'Sizes';
+  title:
+    | 'Billboards'
+    | 'Categories'
+    | 'Sizes'
+    | 'Colors'
+    | 'Products'
+    | 'Orders';
 }
 
 const Header: FC<HeaderProps> = ({ dataArrayLength, title }) => {

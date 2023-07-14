@@ -9,9 +9,25 @@ import DataTable from './data-table';
 import Header from './header';
 import Heading from './heading';
 
-type ClientProps = ClientType;
+type ClientProps = ClientType & { isOrder?: boolean };
 
-const Client: FC<ClientProps> = ({ data, columns, headerTile, searchKey }) => {
+const Client: FC<ClientProps> = ({
+  data,
+  columns,
+  headerTile,
+  searchKey,
+  isOrder
+}) => {
+  if (isOrder) {
+    return (
+      <>
+        <Header dataArrayLength={data.length} title={headerTile} />
+
+        <DataTable columns={columns} data={data} searchKey={searchKey} />
+      </>
+    );
+  }
+
   return (
     <>
       <Header dataArrayLength={data.length} title={headerTile} />

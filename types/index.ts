@@ -11,7 +11,8 @@ export type Route = {
     | 'Sizes'
     | 'Settings'
     | 'Colors'
-    | 'Products';
+    | 'Products'
+    | 'Orders';
   active: boolean;
 };
 
@@ -61,6 +62,16 @@ export type ProductColumn = {
   createdAt: string;
 };
 
+export type OrderColumn = {
+  id: string;
+  phone: string;
+  address: string;
+  isPaid: boolean;
+  totalPrice: string;
+  products: string;
+  createdAt: string;
+};
+
 export type ClientType = {
   data: (
     | BillboardColumn
@@ -68,8 +79,15 @@ export type ClientType = {
     | SizeColumn
     | ColorColumn
     | ProductColumn
+    | OrderColumn
   )[];
   columns: ColumnDef<any>[];
-  headerTile: 'Billboards' | 'Categories' | 'Sizes' | 'Colors' | 'Products';
-  searchKey: 'label' | 'name';
+  headerTile:
+    | 'Billboards'
+    | 'Categories'
+    | 'Sizes'
+    | 'Colors'
+    | 'Products'
+    | 'Orders';
+  searchKey: 'label' | 'name' | 'products';
 };
