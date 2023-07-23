@@ -14,6 +14,7 @@ export const POST: ColorsRoute = async (req, { params }) => {
   try {
     const { userId } = auth();
     const { name, value } = await req.json();
+    console.log(userId);
 
     if (!userId) {
       return new NextResponse('Unauthorized', { status: 401 });

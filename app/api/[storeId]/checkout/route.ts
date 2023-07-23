@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-import Stripe from 'stripe';
+import type Stripe from 'stripe';
 
 import prismaClient from '@/lib/db';
 import { stripe } from '@/lib/stripe';

@@ -17,6 +17,6 @@ export const GET = async () => {
     return NextResponse.json(storeId, { status: 200 });
   } catch (err: unknown) {
     console.log('[STOREID_GET]', err);
-    return new NextResponse('Internal errro', { status: 500 });
+    return new NextResponse('Internal error', { status: 500 });
   }
 };

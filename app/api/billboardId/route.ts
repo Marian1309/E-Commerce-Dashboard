@@ -20,7 +20,7 @@ export const GET = async () => {
 
     return NextResponse.json(billboardId, { status: 200 });
   } catch (err: unknown) {
-    console.log('[STOREID_GET]', err);
-    return new NextResponse('Internal errro', { status: 500 });
+    console.log('[BILLBOARDID_GET]', err);
+    return new NextResponse('Internal error', { status: 500 });
   }
 };
