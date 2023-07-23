@@ -9,3 +9,4 @@ export { default as Header } from './header';
 export { default as Loader } from './loader';
 export { default as DropdownMenuContentList } from './dropdown-menu-content-list';
 export { default as Client } from './client';
+export { default as ThemeToggle } from './theme-toggle';

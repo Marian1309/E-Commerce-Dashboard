@@ -1,7 +1,7 @@
 import type { OrderColumn } from '@/types';
 
 import prismaClient from '@/lib/db';
-import { formatDate, formatter } from '@/lib/utils';
+import { formatDate, formatPrice } from '@/lib/utils';
 
 import { Client } from '@/common/ui/self';
 
@@ -32,7 +32,7 @@ const Orders = async ({ params }: { params: { storeId: string } }) => {
       products: orderItems
         .map((orderItem) => orderItem.product.name)
         .join(', '),
-      totalPrice: formatter.format(
+      totalPrice: formatPrice(
         orderItems.reduce((acc, curr) => {
           return acc + Number(curr.product.price);
         }, 0)

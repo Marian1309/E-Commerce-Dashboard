@@ -1,14 +1,10 @@
-# dependencies
+# Dependencies
 node_modules
+
+# Next.js
+.next
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
-
-# next.js
-.next
-
-# env files
-.env
-.env.local

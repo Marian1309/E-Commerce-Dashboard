@@ -19,10 +19,8 @@ out
 .vscode
 
 # env
-
 .env
 .env.local
 
 # commit validation
-
 .husky/_

@@ -17,7 +17,7 @@ export const copyToClipboard = (text: string, whatCopied: string) => {
   toast.success(`${whatCopied} copied to the clipboard.`);
 };
 
-export const formatter = new Intl.NumberFormat('en-US', {
+export const formatPrice = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD'
-});
+}).format;

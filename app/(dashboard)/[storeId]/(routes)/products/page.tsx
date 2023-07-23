@@ -1,7 +1,7 @@
 import type { ProductColumn } from '@/types';
 
 import prismaClient from '@/lib/db';
-import { formatDate, formatter } from '@/lib/utils';
+import { formatDate, formatPrice } from '@/lib/utils';
 
 import { Client } from '@/common/ui/self';
 
@@ -38,7 +38,7 @@ const Products = async ({ params }: { params: { storeId: string } }) => {
       name,
       isFeatured,
       isArchived,
-      price: formatter.format(price.toNumber()),
+      price: formatPrice(price.toNumber()),
       category: category.name,
       color: color.value,
       size: size.name,

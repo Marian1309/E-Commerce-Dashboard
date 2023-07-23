@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 import prismaClient from '@/lib/db';
+import { stripe } from '@/lib/stripe';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -46,4 +47,39 @@ export const POST = async (
       }
     });
   });
+
+  const order = await prismaClient.order.create({
+    data: {
+      storeId: params.storeId,
+      isPaid: false,
+      orderItems: {
+        create: productIds.map((productId: string) => ({
+          product: {
+            connect: {
+              id: productId
+            }
+          }
+        }))
+      }
+    }
+  });
+
+  const session = await stripe.checkout.sessions.create({
+    line_items,
+    mode: 'payment',
+    billing_address_collection: 'required',
+    phone_number_collection: {
+      enabled: true
+    },
+    success_url: `${process.env.NEXT_PUBLIC_STORE_URL}/cart?success=1`,
+    cancel_url: `${process.env.NEXT_PUBLIC_STORE_URL}/cart?canceled=1`,
+    metadata: {
+      orderId: order.id
+    }
+  });
+
+  return NextResponse.json(
+    { url: session.url },
+    { headers: corsHeaders, status: 200 }
+  );
 };

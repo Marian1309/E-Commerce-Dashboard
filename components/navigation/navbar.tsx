@@ -4,6 +4,8 @@ import { UserButton, auth } from '@clerk/nextjs';
 
 import prismaClient from '@/lib/db';
 
+import { ThemeToggle } from '../ui/self';
+
 import MainNav from './main-nav';
 import StoreSwitcher from './store-switcher';
 
@@ -26,6 +28,7 @@ const Navbar = async () => {
         <MainNav className='mx-6' />
 
         <div className='ml-auto flex items-center space-x-4'>
+          <ThemeToggle />
           <UserButton afterSignOutUrl='/' userProfileMode='navigation' />
         </div>
       </div>
