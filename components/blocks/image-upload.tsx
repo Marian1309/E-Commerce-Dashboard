@@ -55,7 +55,13 @@ const ImageUpload: FC<ImageUploadProps> = ({
               </Button>
             </div>
 
-            <Image fill className='object-cover' alt='image' src={url} />
+            <Image
+              fill
+              className='object-cover'
+              priority
+              alt='image'
+              src={url}
+            />
           </div>
         ))}
       </div>
