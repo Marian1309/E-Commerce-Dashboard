@@ -12,8 +12,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'airbnb',
-    'airbnb/hooks',
-    'next'
+    'airbnb/hooks'
   ],
   rules: {
     '@typescript-eslint/no-empty-interface': 'warn',
@@ -58,7 +57,9 @@ module.exports = {
     'no-use-before-define': 'off',
     indent: 'off',
     'jsx-a11y/heading-has-content': 'off',
-    'react/jsx-curly-newline': 'off'
+    'react/jsx-curly-newline': 'off',
+    'guard-for-in': 'off',
+    'no-restricted-syntax': 'off'
   },
   globals: {
     process: true,

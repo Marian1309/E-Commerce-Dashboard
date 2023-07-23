@@ -16,7 +16,7 @@ import { categoryFormSchema } from '@/lib/validators';
 
 import { useCategoryFormStore } from '@/hooks/stores';
 
-import { AlertModal } from '@/common/modals';
+import AlertModal from '@/common/modals/alert-modal';
 import { Button } from '@/common/ui/button';
 import {
   Form,
@@ -26,6 +26,7 @@ import {
   FormLabel,
   FormMessage
 } from '@/common/ui/form';
+import Heading from '@/common/ui/heading';
 import { Input } from '@/common/ui/input';
 import {
   Select,
@@ -34,7 +35,6 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/common/ui/select';
-import { Heading } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface SettingsFormProps {

@@ -4,7 +4,7 @@ import type { FC } from 'react';
 
 import { Plus } from 'lucide-react';
 
-import { Button } from '../button';
+import { Button } from '../ui/button';
 
 interface AddNewButtonProps {
   onClick: () => void;

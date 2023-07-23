@@ -49,7 +49,7 @@ const getGraphRevenue = async (storeId: string): Promise<GraphData[]> => {
   ];
 
   for (const month in monthlyRevenue) {
-    graphData[parseInt(month)].total = monthlyRevenue[parseInt(month)];
+    graphData[parseInt(month, 10)].total = monthlyRevenue[parseInt(month, 10)];
   }
 
   return graphData;

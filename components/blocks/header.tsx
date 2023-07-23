@@ -4,8 +4,9 @@ import type { FC } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
+import Heading from '@/common/ui/heading';
+
 import AddNewButton from './add-new-button';
-import Heading from './heading';
 
 interface HeaderProps {
   dataArrayLength: number;

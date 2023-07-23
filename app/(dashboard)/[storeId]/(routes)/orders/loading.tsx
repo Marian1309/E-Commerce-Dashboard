@@ -2,7 +2,7 @@
 
 import type { FC } from 'react';
 
-import { Loader } from '@/common/ui/self';
+import Loader from '@/common/ui/loader';
 
 const Loading: FC = () => {
   return (

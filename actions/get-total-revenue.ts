@@ -15,12 +15,12 @@ const getTotalRevenue = async (storeId: string) => {
     }
   });
 
-  const totalRevenue = paidOrders.reduce((acc, curr) => {
-    const orderTotal = curr.orderItems.reduce((acc, curr) => {
-      return acc + curr.product.price.toNumber();
+  const totalRevenue = paidOrders.reduce((totalAcc, order) => {
+    const orderTotal = order.orderItems.reduce((orderTotalAcc, item) => {
+      return orderTotalAcc + item.product.price.toNumber();
     }, 0);
 
-    return acc + orderTotal;
+    return orderTotal + totalAcc;
   }, 0);
 
   return totalRevenue;

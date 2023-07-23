@@ -11,20 +11,22 @@ import {
   getTotalRevenue
 } from '@/actions';
 
-import Overview from '@/common/overview';
+import Overview from '@/common/blocks/overview';
 import { Card, CardContent, CardHeader, CardTitle } from '@/common/ui/card';
-import { Heading } from '@/common/ui/self';
+import Heading from '@/common/ui/heading';
 import { Separator } from '@/common/ui/separator';
 
 interface DashboardPageProps {
   params: { storeId: string };
 }
 
-const DashboardPage: NextPage<DashboardPageProps> = async ({ params }) => {
-  const totalRevenue = await getTotalRevenue(params.storeId);
-  const salesCount = await getSalesCount(params.storeId);
-  const stockCount = await getStockCount(params.storeId);
-  const graphRevenue = await getGraphRevenue(params.storeId);
+const DashboardPage: NextPage<DashboardPageProps> = async ({
+  params: { storeId }
+}) => {
+  const totalRevenue = await getTotalRevenue(storeId);
+  const salesCount = await getSalesCount(storeId);
+  const stockCount = await getStockCount(storeId);
+  const graphRevenue = await getGraphRevenue(storeId);
 
   return (
     <div className='flex-col'>

@@ -16,7 +16,7 @@ import { sizeFormSchema } from '@/lib/validators';
 
 import { useSizeFormStore } from '@/hooks/stores';
 
-import { AlertModal } from '@/common/modals';
+import AlertModal from '@/common/modals/alert-modal';
 import { Button } from '@/common/ui/button';
 import {
   Form,
@@ -26,8 +26,8 @@ import {
   FormLabel,
   FormMessage
 } from '@/common/ui/form';
+import Heading from '@/common/ui/heading';
 import { Input } from '@/common/ui/input';
-import { Heading } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface ColorFormProps {

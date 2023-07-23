@@ -11,8 +11,9 @@ import {
   useReactTable
 } from '@tanstack/react-table';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/common/ui/button';
+import { Input } from '@/common/ui/input';
+import { Separator } from '@/common/ui/separator';
 import {
   Table,
   TableBody,
@@ -20,9 +21,7 @@ import {
   TableHead,
   TableHeader,
   TableRow
-} from '@/components/ui/table';
-
-import { Separator } from '../separator';
+} from '@/common/ui/table';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

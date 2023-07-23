@@ -16,7 +16,8 @@ import { formSchema } from '@/lib/validators';
 
 import { useSettingsStore } from '@/hooks/stores';
 
-import { AlertModal } from '@/common/modals';
+import ApiAlert from '@/common/blocks/api-alert';
+import AlertModal from '@/common/modals/alert-modal';
 import { Button } from '@/common/ui/button';
 import {
   Form,
@@ -26,8 +27,8 @@ import {
   FormLabel,
   FormMessage
 } from '@/common/ui/form';
+import Heading from '@/common/ui/heading';
 import { Input } from '@/common/ui/input';
-import { ApiAlert, Heading } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface SettingsFormProps {

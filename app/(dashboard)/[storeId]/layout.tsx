@@ -35,7 +35,6 @@ const DashboardLayout = async ({ children, params }: DashboardLayoutProps) => {
 
   return (
     <>
-      {/* @ts-ignore */}
       <Navbar />
       {children}
     </>

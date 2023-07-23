@@ -11,11 +11,13 @@ import { Trash } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-import { ProductFormSchema, productFormSchema } from '@/lib/validators';
+import type { ProductFormSchema } from '@/lib/validators';
+import { productFormSchema } from '@/lib/validators';
 
 import { useBillboardFormStore } from '@/hooks/stores';
 
-import { AlertModal } from '@/common/modals';
+import ImageUpload from '@/common/blocks/image-upload';
+import AlertModal from '@/common/modals/alert-modal';
 import { Button } from '@/common/ui/button';
 import { Checkbox } from '@/common/ui/checkbox';
 import {
@@ -27,6 +29,7 @@ import {
   FormLabel,
   FormMessage
 } from '@/common/ui/form';
+import Heading from '@/common/ui/heading';
 import { Input } from '@/common/ui/input';
 import {
   Select,
@@ -35,7 +38,6 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/common/ui/select';
-import { Heading, ImageUpload } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface ProductsFormProps {
@@ -321,6 +323,7 @@ const ProductForm: FC<ProductsFormProps> = ({
                   <FormControl>
                     <Checkbox
                       checked={field.value}
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                       // @ts-ignore
                       onCheckedChange={field.onChange}
                     />
@@ -344,6 +347,7 @@ const ProductForm: FC<ProductsFormProps> = ({
                   <FormControl>
                     <Checkbox
                       checked={field.value}
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                       // @ts-ignore
                       onCheckedChange={field.onChange}
                     />

@@ -1,15 +1,17 @@
+import type { FC } from 'react';
+
 import { redirect } from 'next/navigation';
 
 import { UserButton, auth } from '@clerk/nextjs';
 
 import prismaClient from '@/lib/db';
 
-import { ThemeToggle } from '../ui/self';
+import ThemeToggle from '@/common/blocks/theme-toggle';
 
 import MainNav from './main-nav';
 import StoreSwitcher from './store-switcher';
 
-const Navbar = async () => {
+const Navbar: FC = async () => {
   const { userId } = auth();
 
   if (!userId) {

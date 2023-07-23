@@ -26,8 +26,8 @@ import {
   FormLabel,
   FormMessage
 } from '@/common/ui/form';
+import Heading from '@/common/ui/heading';
 import { Input } from '@/common/ui/input';
-import { Heading } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface SizesFormProps {

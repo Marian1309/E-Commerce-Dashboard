@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
-import axios from 'axios';
 import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
@@ -16,7 +15,8 @@ import type {
 
 import { copyToClipboard } from '@/lib/utils';
 
-import { AlertModal } from '@/common/modals';
+import DropdownMenuContentList from '@/common/blocks/dropdown-menu-content-list';
+import AlertModal from '@/common/modals/alert-modal';
 import { Button } from '@/common/ui/button';
 import {
   DropdownMenu,
@@ -24,7 +24,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/common/ui/dropdown-menu';
-import { DropdownMenuContentList } from '@/common/ui/self';
 
 interface CellActionProps {
   data: OrderColumn;

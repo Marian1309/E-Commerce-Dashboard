@@ -16,7 +16,8 @@ import { billboardFormSchema } from '@/lib/validators';
 
 import { useBillboardFormStore } from '@/hooks/stores';
 
-import { AlertModal } from '@/common/modals';
+import ImageUpload from '@/common/blocks/image-upload';
+import AlertModal from '@/common/modals/alert-modal';
 import { Button } from '@/common/ui/button';
 import {
   Form,
@@ -26,8 +27,8 @@ import {
   FormLabel,
   FormMessage
 } from '@/common/ui/form';
+import Heading from '@/common/ui/heading';
 import { Input } from '@/common/ui/input';
-import { Heading, ImageUpload } from '@/common/ui/self';
 import { Separator } from '@/common/ui/separator';
 
 interface SettingsFormProps {

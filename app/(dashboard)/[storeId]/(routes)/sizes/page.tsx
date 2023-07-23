@@ -3,7 +3,7 @@ import type { SizeColumn } from '@/types';
 import prismaClient from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 
-import Client from '@/common/ui/self/client';
+import Client from '@/common/client';
 
 import { columns } from './components/columns';
 
@@ -12,9 +12,7 @@ const Sizes = async ({ params }: { params: { storeId: string } }) => {
     where: {
       storeId: params.storeId
     },
-    orderBy: {
-      createdAt: 'desc'
-    }
+    orderBy: { createdAt: 'desc' }
   });
 
   const formattedSizes: SizeColumn[] = sizes.map(
