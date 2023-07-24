@@ -19,8 +19,6 @@
     "removeComments": true,
     "baseUrl": ".",
     "paths": {
-      "@/common": ["./components"],
-      "@/common/*": ["./components/*"],
       "@/*": ["./*"]
     }
   },

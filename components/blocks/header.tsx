@@ -4,7 +4,7 @@ import type { FC } from 'react';
 
 import { useParams, useRouter } from 'next/navigation';
 
-import Heading from '@/common/ui/heading';
+import Heading from '@/components/ui/heading';
 
 import AddNewButton from './add-new-button';
 

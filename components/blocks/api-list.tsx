@@ -4,7 +4,7 @@ import type { FC } from 'react';
 
 import { useParams } from 'next/navigation';
 
-import ApiAlert from './blocks/api-alert';
+import ApiAlert from './api-alert';
 
 interface ApiListProps {
   entityName: string;

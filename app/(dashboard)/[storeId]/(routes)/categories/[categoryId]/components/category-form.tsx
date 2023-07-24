@@ -16,8 +16,8 @@ import { categoryFormSchema } from '@/lib/validators';
 
 import { useCategoryFormStore } from '@/hooks/stores';
 
-import AlertModal from '@/common/modals/alert-modal';
-import { Button } from '@/common/ui/button';
+import AlertModal from '@/components/modals/alert-modal';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -25,17 +25,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/common/ui/form';
-import Heading from '@/common/ui/heading';
-import { Input } from '@/common/ui/input';
+} from '@/components/ui/form';
+import Heading from '@/components/ui/heading';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
-} from '@/common/ui/select';
-import { Separator } from '@/common/ui/separator';
+} from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
 
 interface SettingsFormProps {
   initialData: Category | null;

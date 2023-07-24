@@ -25,7 +25,7 @@ export const GET: ColorIdType = async (_, { params }) => {
     return NextResponse.json(color, { status: 200 });
   } catch (err: unknown) {
     console.log('[COLOR_ID_GET]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -60,8 +60,8 @@ export const DELETE: ColorIdType = async (_, { params }) => {
 
     return NextResponse.json(color, { status: 200 });
   } catch (err: unknown) {
-    console.log('[CATEGORY_ID_DELETE]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    console.log('[COLOR_ID_DELETE]', err);
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -112,7 +112,7 @@ export const PATCH: ColorIdType = async (req, { params }) => {
 
     return NextResponse.json(color, { status: 200 });
   } catch (err: unknown) {
-    console.log('[SIZE_ID_PATCH]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    console.log('[COLOR_ID_PATCH]', err);
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

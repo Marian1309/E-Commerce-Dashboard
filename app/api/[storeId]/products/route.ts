@@ -88,7 +88,7 @@ export const POST: ProductRoute = async (req, { params }) => {
     return NextResponse.json(product, { status: 200 });
   } catch (err: unknown) {
     console.log('[PRODUCTS_POST]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -127,6 +127,6 @@ export const GET: ProductRoute = async (req, { params }) => {
     return NextResponse.json(products, { status: 200 });
   } catch (err: unknown) {
     console.log('[PRODUCTS_GET]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

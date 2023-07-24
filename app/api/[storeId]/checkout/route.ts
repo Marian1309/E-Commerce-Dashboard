@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
@@ -6,11 +7,7 @@ import type Stripe from 'stripe';
 import prismaClient from '@/lib/db';
 import { stripe } from '@/lib/stripe';
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-};
+import { corsHeaders } from '../../headers';
 
 export const OPTIONS = async () => {
   return NextResponse.json({}, { headers: corsHeaders });

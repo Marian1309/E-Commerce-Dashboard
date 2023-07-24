@@ -11,10 +11,10 @@ import {
   getTotalRevenue
 } from '@/actions';
 
-import Overview from '@/common/blocks/overview';
-import { Card, CardContent, CardHeader, CardTitle } from '@/common/ui/card';
-import Heading from '@/common/ui/heading';
-import { Separator } from '@/common/ui/separator';
+import Overview from '@/components/blocks/overview';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Heading from '@/components/ui/heading';
+import { Separator } from '@/components/ui/separator';
 
 interface DashboardPageProps {
   params: { storeId: string };

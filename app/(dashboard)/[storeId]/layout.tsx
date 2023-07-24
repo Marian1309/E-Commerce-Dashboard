@@ -6,7 +6,7 @@ import { auth } from '@clerk/nextjs';
 
 import prismaClient from '@/lib/db';
 
-import { Navbar } from '@/common/navigation';
+import { Navbar } from '@/components/layout';
 
 interface DashboardLayoutProps {
   children: ReactNode;

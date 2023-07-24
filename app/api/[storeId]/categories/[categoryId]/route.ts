@@ -28,7 +28,7 @@ export const GET: CategoryIdType = async (_, { params }) => {
     return NextResponse.json(category, { status: 200 });
   } catch (err: unknown) {
     console.log('[CATEGORY_ID_GET]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -64,7 +64,7 @@ export const DELETE: CategoryIdType = async (_, { params }) => {
     return NextResponse.json(category, { status: 200 });
   } catch (err: unknown) {
     console.log('[CATEGORY_ID_DELETE]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -116,6 +116,6 @@ export const PATCH: CategoryIdType = async (req, { params }) => {
     return NextResponse.json(category, { status: 200 });
   } catch (err: unknown) {
     console.log('[CATEGORY_ID_PATCH]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

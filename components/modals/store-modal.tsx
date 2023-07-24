@@ -13,8 +13,8 @@ import { formSchema } from '@/lib/validators';
 
 import { useStoreModalStore } from '@/hooks/stores';
 
-import Modal from '@/common/blocks/modal';
-import { Button } from '@/common/ui/button';
+import Modal from '@/components/blocks/modal';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -22,8 +22,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/common/ui/form';
-import { Input } from '@/common/ui/input';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
 const StoreModal: FC = () => {
   const { isOpen, onClose, isLoading, setIsLoading } = useStoreModalStore();

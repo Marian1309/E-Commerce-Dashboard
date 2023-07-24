@@ -3,8 +3,8 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
-import Modal from '@/common/blocks/modal';
-import { Button } from '@/common/ui/button';
+import Modal from '@/components/blocks/modal';
+import { Button } from '@/components/ui/button';
 
 interface AlertModalProps {
   isOpen: boolean;

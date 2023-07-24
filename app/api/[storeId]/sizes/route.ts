@@ -53,7 +53,7 @@ export const POST: BillboardsRoute = async (req, { params }) => {
     return NextResponse.json(size, { status: 200 });
   } catch (err: unknown) {
     console.log('[SIZE_POST]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -72,6 +72,6 @@ export const GET: BillboardsRoute = async (_, { params }) => {
     return NextResponse.json(sizes, { status: 200 });
   } catch (err: unknown) {
     console.log('[SIZES_GET]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

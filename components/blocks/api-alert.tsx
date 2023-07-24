@@ -6,10 +6,10 @@ import { Copy, Server } from 'lucide-react';
 
 import { copyToClipboard } from '@/lib/utils';
 
-import { Alert, AlertDescription, AlertTitle } from '@/common/ui/alert';
-import type { BadgeProps } from '@/common/ui/badge';
-import { Badge } from '@/common/ui/badge';
-import { Button } from '@/common/ui/button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import type { BadgeProps } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 interface ApiAlertProps {
   title: string;

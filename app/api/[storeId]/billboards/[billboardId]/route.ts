@@ -25,7 +25,7 @@ export const GET: BillboardIdType = async (_, { params }) => {
     return NextResponse.json(billboard, { status: 200 });
   } catch (err: unknown) {
     console.log('[BILLBOARDID_GET]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -61,7 +61,7 @@ export const DELETE: BillboardIdType = async (_, { params }) => {
     return NextResponse.json(billboard, { status: 200 });
   } catch (err: unknown) {
     console.log('[BILLBOARDID_DELETE]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -113,6 +113,6 @@ export const PATCH: BillboardIdType = async (req, { params }) => {
     return NextResponse.json(billboard, { status: 200 });
   } catch (err: unknown) {
     console.log('[BILLBOARDID_PATCH]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

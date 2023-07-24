@@ -21,6 +21,6 @@ export const GET = async () => {
     return NextResponse.json(billboardId, { status: 200 });
   } catch (err: unknown) {
     console.log('[BILLBOARDID_GET]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

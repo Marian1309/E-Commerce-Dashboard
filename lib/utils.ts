@@ -8,13 +8,13 @@ export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
 
-export const formatDate = (date: Date, format: string) => {
-  return dayjs(date).format(format);
-};
-
 export const copyToClipboard = (text: string, whatCopied: string) => {
   navigator.clipboard.writeText(text);
   toast.success(`${whatCopied} copied to the clipboard.`);
+};
+
+export const formatDate = (date: Date, format: string) => {
+  return dayjs(date).format(format);
 };
 
 export const formatPrice = new Intl.NumberFormat('en-US', {

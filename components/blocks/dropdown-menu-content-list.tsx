@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import type { DropdownMenuItem as DropdownMenuItemType } from '@/types';
 
-import { DropdownMenuItem } from '@/common/ui/dropdown-menu';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 
 interface DropdownMenuContentListProps {
   dropdownMenuItems: DropdownMenuItemType[];

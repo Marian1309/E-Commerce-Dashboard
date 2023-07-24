@@ -31,7 +31,7 @@ export const GET: ProductIdType = async (_, { params }) => {
     return NextResponse.json(product, { status: 200 });
   } catch (err: unknown) {
     console.log('[PRODUCTID_GET]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -67,7 +67,7 @@ export const DELETE: ProductIdType = async (_, { params }) => {
     return NextResponse.json(product, { status: 200 });
   } catch (err: unknown) {
     console.log('[PRODUCTID_DELETE]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -163,6 +163,6 @@ export const PATCH: ProductIdType = async (req, { params }) => {
     return NextResponse.json(product, { status: 200 });
   } catch (err: unknown) {
     console.log('[PRODUCTID_PATCH]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

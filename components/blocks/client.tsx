@@ -2,12 +2,12 @@ import type { FC } from 'react';
 
 import type { ClientType } from '@/types';
 
-import Heading from '@/common/ui/heading';
-import { Separator } from '@/common/ui/separator';
+import Heading from '@/components/ui/heading';
+import { Separator } from '@/components/ui/separator';
 
 import ApiList from './api-list';
-import DataTable from './blocks/data-table';
-import Header from './blocks/header';
+import DataTable from './data-table';
+import Header from './header';
 
 type ClientProps = ClientType & { isOrder?: boolean };
 

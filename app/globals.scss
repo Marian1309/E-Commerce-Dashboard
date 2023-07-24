@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+// ShadcnUI Styles
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -133,9 +135,9 @@ select {
 
 // Custom Styles
 
-:root {
-}
-
 ::-webkit-scrollbar {
   display: none;
+}
+
+:root {
 }

@@ -6,7 +6,7 @@ import { UserButton, auth } from '@clerk/nextjs';
 
 import prismaClient from '@/lib/db';
 
-import ThemeToggle from '@/common/blocks/theme-toggle';
+import ThemeToggle from '@/components/blocks/theme-toggle';
 
 import MainNav from './main-nav';
 import StoreSwitcher from './store-switcher';

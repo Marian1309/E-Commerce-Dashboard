@@ -29,6 +29,6 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json(store, { status: 200 });
   } catch (err: unknown) {
     console.log('[STORES_POST]', err);
-    return new NextResponse('Internal errro', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

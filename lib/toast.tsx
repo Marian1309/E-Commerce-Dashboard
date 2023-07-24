@@ -10,7 +10,7 @@ interface ToastProps {
 const ToastIn2Rows: FC<ToastProps> = ({ title, description }) => {
   return (
     <div className='flex flex-col'>
-      <h1>{title}</h1>
+      <h2>{title}</h2>
       <p className='text-xs'>{description}</p>
     </div>
   );
@@ -21,4 +21,4 @@ const toastOptions: ToastOptions = {
   duration: 2500
 };
 
-export { ToastIn2Rows, toastOptions };
+export { toastOptions, ToastIn2Rows };

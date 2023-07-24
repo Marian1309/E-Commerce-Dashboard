@@ -17,7 +17,7 @@ import { cn } from '@/lib/utils';
 
 import { useStoreModalStore } from '@/hooks/stores';
 
-import { Button } from '@/common/ui/button';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -26,8 +26,12 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator
-} from '@/common/ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '@/common/ui/popover';
+} from '@/components/ui/command';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from '@/components/ui/popover';
 
 interface StoreSwitcherProps {
   items: Store[];

@@ -3,7 +3,7 @@ import type { ColorColumn } from '@/types';
 import prismaClient from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 
-import Client from '@/common/client';
+import Client from '@/components/blocks/client';
 
 import { columns } from './components/columns';
 

@@ -39,7 +39,7 @@ export const PATCH: StoreIdRoute = async (req, { params }) => {
 
     return NextResponse.json(store, { status: 200 });
   } catch (err: unknown) {
-    console.log('[STORES_ID_PATCH]', err);
+    console.log('[STORES_STOREID_PATCH]', err);
     return new NextResponse('Internal Error', { status: 500 });
   }
 };
@@ -65,7 +65,7 @@ export const DELETE: StoreIdRoute = async (_, { params }) => {
 
     return NextResponse.json(store, { status: 200 });
   } catch (err: unknown) {
-    console.log('[STORES_ID_DELETE]', err);
+    console.log('[STORES_STOREID_DELETE]', err);
     return new NextResponse('Internal Error', { status: 500 });
   }
 };

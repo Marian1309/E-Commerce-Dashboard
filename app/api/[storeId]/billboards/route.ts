@@ -53,7 +53,7 @@ export const POST: BillboardRoute = async (req, { params }) => {
     return NextResponse.json(billboard, { status: 200 });
   } catch (err: unknown) {
     console.log('[BILLBOARDS_POST]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -72,6 +72,6 @@ export const GET: BillboardRoute = async (_, { params }) => {
     return NextResponse.json(billboards, { status: 200 });
   } catch (err: unknown) {
     console.log('[BILLBOARDS_GET]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

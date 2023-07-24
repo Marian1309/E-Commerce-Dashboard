@@ -53,7 +53,7 @@ export const POST: CategoryRoute = async (req, { params }) => {
     return NextResponse.json(category, { status: 200 });
   } catch (err: unknown) {
     console.log('[CATEGORY_POST]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };
 
@@ -72,6 +72,6 @@ export const GET: CategoryRoute = async (_, { params }) => {
     return NextResponse.json(categories, { status: 200 });
   } catch (err: unknown) {
     console.log('[CATEGORY_GET]', err);
-    return new NextResponse('Internal error', { status: 500 });
+    return new NextResponse('Internal Error', { status: 500 });
   }
 };

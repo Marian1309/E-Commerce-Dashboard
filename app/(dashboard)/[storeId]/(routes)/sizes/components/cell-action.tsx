@@ -16,15 +16,15 @@ import type {
 
 import { copyToClipboard } from '@/lib/utils';
 
-import DropdownMenuContentList from '@/common/blocks/dropdown-menu-content-list';
-import AlertModal from '@/common/modals/alert-modal';
-import { Button } from '@/common/ui/button';
+import DropdownMenuContentList from '@/components/blocks/dropdown-menu-content-list';
+import AlertModal from '@/components/modals/alert-modal';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuTrigger
-} from '@/common/ui/dropdown-menu';
+} from '@/components/ui/dropdown-menu';
 
 interface CellActionProps {
   data: SizeColumn;

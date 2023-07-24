@@ -59,7 +59,8 @@ module.exports = {
     'jsx-a11y/heading-has-content': 'off',
     'react/jsx-curly-newline': 'off',
     'guard-for-in': 'off',
-    'no-restricted-syntax': 'off'
+    'no-restricted-syntax': 'off',
+    'react/prop-types': 'off'
   },
   globals: {
     process: true,
