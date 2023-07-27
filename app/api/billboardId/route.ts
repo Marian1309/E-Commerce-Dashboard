@@ -18,7 +18,7 @@ export const GET = async () => {
 
     const billboardId = billboard?.billboardId;
 
-    return NextResponse.json(billboardId, { status: 200 });
+    return NextResponse.json(JSON.stringify(billboardId), { status: 200 });
   } catch (err: unknown) {
     console.log('[BILLBOARDID_GET]', err);
     return new NextResponse('Internal Error', { status: 500 });
