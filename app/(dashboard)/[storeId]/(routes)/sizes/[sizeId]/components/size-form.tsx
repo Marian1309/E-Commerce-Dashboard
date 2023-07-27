@@ -70,8 +70,9 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
       router.push(`/${params.storeId}/sizes`);
 
       toast.success(toastMessage);
-    } catch (err: unknown) {
-      toast.error('Something went wrong.');
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
     }
@@ -87,8 +88,9 @@ const SizeForm: FC<SizesFormProps> = ({ initialData }) => {
       router.push(`/${params.storeId}/sizes`);
 
       toast.success(`Size \`${form.watch('name')}\` deleted.`);
-    } catch (error: unknown) {
-      toast.error('Make sure you removed all products using this size first.');
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
       setIsOpen(false);

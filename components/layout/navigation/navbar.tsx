@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 
 import { UserButton, auth } from '@clerk/nextjs';
 
+import { ADMIN_USER_ID } from '@/lib/constants';
 import prismaClient from '@/lib/db';
 
 import ThemeToggle from '@/components/blocks/theme-toggle';
@@ -19,7 +20,7 @@ const Navbar: FC = async () => {
   }
 
   const stores = await prismaClient.store.findMany({
-    where: { userId }
+    where: { userId: ADMIN_USER_ID }
   });
 
   return (

@@ -59,8 +59,9 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       router.refresh();
 
       toast.success(`Store \`${form.watch('name')}\` updated.`);
-    } catch (err: any) {
-      toast.error('Something went wrong.');
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
     }
@@ -76,8 +77,9 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       router.push('/');
 
       toast.success(`Store \`${form.watch('name')}\` deleted.`);
-    } catch (err: any) {
-      toast.error('Make sure you removed all products and categories first');
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
       setIsOpen(false);

@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 
 import { auth } from '@clerk/nextjs';
 
+import { ADMIN_USER_ID } from '@/lib/constants';
 import prismaClient from '@/lib/db';
 
 import { Navbar } from '@/components/layout';
@@ -24,7 +25,7 @@ const DashboardLayout = async ({ children, params }: DashboardLayoutProps) => {
 
   const store = await prismaClient.store.findFirst({
     where: {
-      userId,
+      userId: ADMIN_USER_ID,
       id: params.storeId
     }
   });

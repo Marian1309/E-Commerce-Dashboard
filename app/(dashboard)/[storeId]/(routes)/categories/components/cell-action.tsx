@@ -67,10 +67,9 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
       router.refresh();
 
       toast.success(`Category \`${data.name}\` deleted.`);
-    } catch (error: unknown) {
-      toast.error(
-        'Make sure you removed all categories using this category first.'
-      );
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
       setIsOpen(false);

@@ -68,7 +68,8 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
 
       toast.success(`Color \`${data.name}\` deleted.`);
     } catch (error: any) {
-      toast.error('Make sure you removed all products using this size first.');
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
       setIsOpen(false);

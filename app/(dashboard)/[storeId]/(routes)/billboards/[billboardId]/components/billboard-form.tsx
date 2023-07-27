@@ -74,8 +74,9 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
       router.push(`/${params.storeId}/billboards`);
 
       toast.success(toastMessage);
-    } catch (err: any) {
-      toast.error('Something went wrong.');
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
     }
@@ -93,10 +94,9 @@ const BillboardForm: FC<SettingsFormProps> = ({ initialData }) => {
       router.push(`/${params.storeId}/billboards`);
 
       toast.success(`Billboard \`${form.watch('label')}\` deleted.`);
-    } catch (error: unknown) {
-      toast.error(
-        'Make sure you removed all categories using this billboard first.'
-      );
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
       setIsOpen(false);

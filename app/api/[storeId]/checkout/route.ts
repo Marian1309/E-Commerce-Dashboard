@@ -4,13 +4,12 @@ import { NextResponse } from 'next/server';
 
 import type Stripe from 'stripe';
 
+import { CORS_HEADERS } from '@/lib/constants';
 import prismaClient from '@/lib/db';
-import { stripe } from '@/lib/stripe';
-
-import { corsHeaders } from '../../headers';
+import stripe from '@/lib/stripe';
 
 export const OPTIONS = async () => {
-  return NextResponse.json({}, { headers: corsHeaders });
+  return NextResponse.json({}, { headers: CORS_HEADERS });
 };
 
 export const POST = async (
@@ -78,6 +77,6 @@ export const POST = async (
 
   return NextResponse.json(
     { url: session.url },
-    { headers: corsHeaders, status: 200 }
+    { headers: CORS_HEADERS, status: 200 }
   );
 };

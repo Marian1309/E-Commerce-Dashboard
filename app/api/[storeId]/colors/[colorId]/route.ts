@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 
 import { auth } from '@clerk/nextjs';
 
+import { ADMIN_USER_ID } from '@/lib/constants';
 import prismaClient from '@/lib/db';
 
 type ColorIdType = (
@@ -35,6 +36,12 @@ export const DELETE: ColorIdType = async (_, { params }) => {
 
     if (!userId) {
       return new NextResponse('Unauthenticated', { status: 403 });
+    }
+
+    if (userId !== ADMIN_USER_ID) {
+      return new NextResponse('You are not able to do this action.', {
+        status: 404
+      });
     }
 
     if (!params.colorId) {
@@ -75,6 +82,12 @@ export const PATCH: ColorIdType = async (req, { params }) => {
 
     if (!userId) {
       return new NextResponse('Unauthenticated', { status: 403 });
+    }
+
+    if (userId !== ADMIN_USER_ID) {
+      return new NextResponse('You are not able to do this action.', {
+        status: 404
+      });
     }
 
     if (!name) {

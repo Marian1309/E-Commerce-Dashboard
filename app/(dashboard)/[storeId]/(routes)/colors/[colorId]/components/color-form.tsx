@@ -69,8 +69,9 @@ const ColorForm: FC<ColorFormProps> = ({ initialData }) => {
       router.refresh();
       router.push(`/${params.storeId}/colors`);
       toast.success(toastMessage);
-    } catch (err: unknown) {
-      toast.error('Something went wrong.');
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
     }
@@ -86,8 +87,9 @@ const ColorForm: FC<ColorFormProps> = ({ initialData }) => {
       router.push(`/${params.storeId}/colors`);
 
       toast.success(`Color \`${form.watch('name')}\` deleted.`);
-    } catch (error: unknown) {
-      toast.error('Make sure you removed all products using this size first.');
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
       setIsOpen(false);

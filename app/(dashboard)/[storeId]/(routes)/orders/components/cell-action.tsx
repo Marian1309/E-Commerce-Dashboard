@@ -64,10 +64,9 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
       router.refresh();
 
       toast.success(`Order with id \`${data.id}\` deleted.`);
-    } catch (error: unknown) {
-      toast.error(
-        'Make sure you removed all categories using this billboard first.'
-      );
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
       setOpen(false);

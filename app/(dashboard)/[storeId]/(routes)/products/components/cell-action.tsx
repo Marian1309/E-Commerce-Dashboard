@@ -58,7 +58,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
     }
   ];
 
-  const handleBillboardDeleting = async () => {
+  const handleProducteleting = async () => {
     try {
       setIsLoading(true);
 
@@ -67,10 +67,9 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
       router.refresh();
 
       toast.success(`Product \`${data.name}\` deleted.`);
-    } catch (error: unknown) {
-      toast.error(
-        'Make sure you removed all categories using this billboard first.'
-      );
+    } catch (error: any) {
+      toast.error(error.response.data);
+      console.clear();
     } finally {
       setIsLoading(false);
       setOpen(false);
@@ -82,7 +81,7 @@ const CellAction: FC<CellActionProps> = ({ data }) => {
       <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
-        onConfirm={handleBillboardDeleting}
+        onConfirm={handleProducteleting}
         isLoading={isLoading}
       />
 
