@@ -17,7 +17,7 @@ const ApiList: FC<ApiListProps> = ({ entityIdName, entityName }) => {
   const baseUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}/api/${params.storeId}`;
 
   return (
-    <>
+    <div className='flex flex-col gap-y-4'>
       <ApiAlert
         title='GET'
         variant='public'
@@ -53,7 +53,7 @@ const ApiList: FC<ApiListProps> = ({ entityIdName, entityName }) => {
         variant='admin'
         description={`${baseUrl}/${entityName}/${entityIdName}`}
       />
-    </>
+    </div>
   );
 };
 

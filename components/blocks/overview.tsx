@@ -1,6 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
+import { useState } from 'react';
 
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
@@ -9,8 +10,19 @@ interface OverviewProps {
 }
 
 const Overview: FC<OverviewProps> = ({ data }) => {
+  const handleWindowResize = () => {
+    return Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0
+    );
+  };
+
+  const [height, setHeight] = useState<number>(handleWindowResize());
+
+  window.addEventListener('resize', () => setHeight(handleWindowResize));
+
   return (
-    <ResponsiveContainer width='100%' height={350}>
+    <ResponsiveContainer width='100%' height={height > 900 ? 350 : 250}>
       <BarChart data={data}>
         <XAxis
           dataKey='name'

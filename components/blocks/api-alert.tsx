@@ -49,6 +49,7 @@ const ApiAlert: FC<ApiAlertProps> = ({
           variant='outline'
           size='icon'
           onClick={() => copyToClipboard(description, 'API Route')}
+          className='ml-2 p-2 px-3 md:ml-0 md:p-0'
         >
           <Copy className='h-4 w-4' />
         </Button>
