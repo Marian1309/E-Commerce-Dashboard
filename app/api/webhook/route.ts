@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 import type Stripe from 'stripe';
 
 import prismaClient from '@/lib/db';
-import { stripe } from '@/lib/stripe';
+import stripe from '@/lib/stripe';
 
 export const POST = async (req: NextRequest) => {
   const body = await req.text();
