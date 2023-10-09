@@ -1,7 +1,5 @@
 import type { NextPage } from 'next';
 
-import { DollarSign } from 'lucide-react';
-
 import { formatPrice } from '@/lib/utils';
 
 import {
@@ -41,12 +39,10 @@ const DashboardPage: NextPage<DashboardPageProps> = async ({
               <CardTitle className='text-sm font-medium'>
                 Total Revenue
               </CardTitle>
-
-              <DollarSign className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
 
             <CardContent>
-              <div className='text-2xl font-bold'>
+              <div className='text-sm font-bold md:text-2xl'>
                 {formatPrice(totalRevenue)}
               </div>
             </CardContent>
@@ -55,12 +51,10 @@ const DashboardPage: NextPage<DashboardPageProps> = async ({
           <Card>
             <CardHeader className='flex-row space-y-0 pb-2 flex-between'>
               <CardTitle className='text-sm font-medium'>Sales</CardTitle>
-
-              <DollarSign className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
 
             <CardContent>
-              <div className='text-2xl font-bold'>+{salesCount}</div>
+              <div className='text-sm font-bold md:text-2xl'>+{salesCount}</div>
             </CardContent>
           </Card>
 
@@ -69,12 +63,10 @@ const DashboardPage: NextPage<DashboardPageProps> = async ({
               <CardTitle className='text-sm font-medium'>
                 Products in Stock
               </CardTitle>
-
-              <DollarSign className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
 
             <CardContent>
-              <div className='text-2xl font-bold'>{stockCount}</div>
+              <div className='text-sm font-bold md:text-2xl'>{stockCount}</div>
             </CardContent>
           </Card>
         </div>
